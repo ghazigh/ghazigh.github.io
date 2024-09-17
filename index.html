@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <nav id="navbar">
+        <nav>
             <div class="logo">Ghazi Gharsallah</div>
             <ul>
                 <li><a href="#about">About</a></li>
@@ -31,8 +31,22 @@
 
     <section id="projects">
         <h2>Projects</h2>
-        <div class="projects-container" id="projects-container">
-            <!-- Projects will be dynamically loaded here -->
+        <div class="projects-container">
+            <div class="project-card">
+                <h3>Project 1</h3>
+                <p>Description of project 1.</p>
+                <a href="#" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Project 2</h3>
+                <p>Description of project 2.</p>
+                <a href="#" target="_blank">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Project 3</h3>
+                <p>Description of project 3.</p>
+                <a href="#" target="_blank">View Project</a>
+            </div>
         </div>
     </section>
 
@@ -40,9 +54,9 @@
         <h2>Contact</h2>
         <p>If you'd like to get in touch, feel free to drop me a message!</p>
         <form id="contact-form">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <textarea id="message" placeholder="Your Message" required></textarea>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
             <button type="submit">Send Message</button>
         </form>
     </section>
@@ -50,7 +64,5 @@
     <footer>
         <p>&copy; 2024 Ghazi Gharsallah. All rights reserved.</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
