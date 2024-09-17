@@ -12,6 +12,132 @@ body {
     color: #333;
 }
 
+
+
+
+
+
+
+
+
+
+
+/* Navbar */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px; /* Add spacing between links */
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+nav a:hover {
+    background: #555;
+    color: #fff;
+}
+
+/* Section Spacing */
+#about, #projects, #contact {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#projects h2, #about h2, #contact h2 {
+    margin-bottom: 20px;
+    font-size: 2rem; /* Increase heading size for emphasis */
+}
+
+/* Add spacing between projects */
+.projects-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Project Card Styling */
+.project-card {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Rounded corners */
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.project-card a {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #333;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.project-card a:hover {
+    background: #333;
+    color: #fff;
+}
+/* Contact Form Styling */
+#contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Add spacing between form elements */
+}
+
+#contact-form input, #contact-form textarea {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#contact-form button {
+    padding: 15px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#contact-form button:hover {
+    background: #555;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Header and Navigation */
 header {
     position: fixed;
@@ -163,6 +289,7 @@ footer {
     text-align: center;
     padding: 20px 0;
     margin-top: 50px;
+    font-size: 0.9rem; /* Slightly smaller text */
 }
 
 /* Responsive Layout */
