@@ -1,68 +1,695 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghazi Gharsallah | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ghazi Gharsallah</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:site_name" content="" />
+    <meta property="og:description" content="" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="css/flexslider.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- For GitHub icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- For Google Scholar icon -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+    <!-- Modernizr JS -->
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
 </head>
+
 <body>
-    <header>
-        <nav>
-            <div class="logo">Ghazi Gharsallah</div>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div id="colorlib-page">
+        <div class="container-wrap">
+            <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar"><i></i></a>
+            <aside id="colorlib-aside" role="complementary" class="border js-fullheight">
+                <div class="text-center">
+                    <div class="author-img" style="background-image: url(images/about.jpg);"></div>
+                    <h1 id="colorlib-logo"><a href="index.html">Ghazi Gharsallah</a></h1>
+                    <span class="position">Artificial Intelligence<br>6G V2X</span>
+                    <a class="btn btn-primary btn-learn" href="files/CV.pdf" target="_blank">Download CV
+                        <i class="icon-download4"></i></a>
+                    <table class="media">
+                        <tr>
+                            <td><a href="https://github.com/ghazigh" target="_blank">
+                                    <i class="fa fa-github" style="font-size: 30px"></i></a></td>
+                            <td><a href="https://www.linkedin.com/in/ghazi-gharsallah-29264a155/" target="_blank">
+                                    <i class="icon-linkedin2" style="font-size: 30px"></i></a></td>
+                            <td><a href="https://scholar.google.com/citations?hl=en&user=R-J2efEAAAAJ" target="_blank">
+                                    <i class="ai ai-google-scholar" style="font-size: 30px"></i></a></td>
+                        </tr>
+                    </table>
+                </div>
+                <nav id="colorlib-main-menu" role="navigation" class="navbar">
+                    <div id="navbar" class="collapse">
+                        <ul>
+                            <li><a href="#" data-nav-section="about">About</a></li>
+                            <li><a href="#" data-nav-section="education">Education</a></li>
+                            <li><a href="#" data-nav-section="experience">Experience</a></li>
+                            <li><a href="#" data-nav-section="research">Research</a></li>
+                            <li><a href="#" data-nav-section="projects">Projects</a></li>
+                            <li><a href="#" data-nav-section="contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </nav>
 
-    <section id="hero">
-        <h1>Welcome to My Personal Website</h1>
-        <p>Your one-stop showcase of my projects, skills, and passions.</p>
-        <button id="learn-more-btn">Learn More</button>
-    </section>
+            </aside>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hello! I'm Ghazi Gharsallah, an enthusiastic web developer and PhD student. I specialize in creating dynamic and beautiful web pages. Here, you'll find some of my favorite projects and more about my work.</p>
-    </section>
+            <div id="colorlib-main">
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="projects-container">
-            <div class="project-card">
-                <h3>Project 1</h3>
-                <p>Description of project 1.</p>
-                <a href="#" target="_blank">View Project</a>
+                <section class="colorlib-about" data-section="about">
+                    <div class="colorlib-narrow-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
+                                    <div class="col-md-12">
+                                        <div class="about-desc">
+                                            <span class="heading-meta">Who am I?</span>
+                                            <h2 class="colorlib-heading">About me</h2>
+                                            <p>I am a Ph.D. student at <a href="https://www.etsmtl.ca/"
+                                                target="_blank">ÉTS Montréal</a> supervised by professors
+                                                <a href="https://www.etsmtl.ca/en/study-at-ets/professors/gkaddoum" target="_blank">Georges Kaddoum</a>, 
+                                                specializing in Artificial Intelligence (AI) and 
+                                                6G vehicular networks (V2X). 
+                                                My research focuses on leveraging AI-driven technologies to address challenges in next-generation network management, 
+                                                particularly in the areas of digital twin and multimodal collaborative perception for 6G V2X network management and radio resource management. 
+                                                My recent work includes the development of AI solutions using Vision Transformers for 6G vehicular networks.</p>
+
+                                            <p>My academic journey has been shaped by hands-on experiences across various industries, 
+                                                including the development of AI-based property valuation models and NLP solutions for healthcare. 
+                                                I have also contributed to research on the robustness of AI classifiers against adversarial attacks 
+                                                during my time as a visiting student at the University of California, Irvine. 
+                                                With a strong background in deep learning, my work bridges practical AI applications with theoretical advancements.</p>
+
+                                            <p>Outside of research, I have a passion for teaching and mentoring, currently serving as a Teaching Assistant at ÉTS. 
+                                                With a commitment to advancing the field of AI and its real-world applications, I aim to continue contributing to both academia and industry.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="colorlib-education" data-section="education">
+                    <div class="colorlib-narrow-content">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box"
+                                data-animate-effect="fadeInLeft">
+                                <span class="heading-meta">Education</span>
+                                <h2 class="colorlib-heading animate-box">Education</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+                                <div class="fancy-collapse-panel">
+                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                                        href="#collapseOne" aria-expanded="false"
+                                                        aria-controls="collapseOne">
+                                                        <strong>Ph.D.</strong>
+                                                        <span>2021-present</span><br
+                                                            style="display: block; content: ''; margin-top: 6px; ">
+                                                        ÉTS Montréal
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel"
+                                                aria-labelledby="headingOne">
+                                                <div class="panel-body">
+                                                    <p>
+                                                        I am a Ph.D. student at <a href="https://www.etsmtl.ca/"
+                                                target="_blank">ÉTS Montréal</a> supervised by professors
+                                                <a href="https://www.etsmtl.ca/en/study-at-ets/professors/gkaddoum" target="_blank">Georges Kaddoum</a>, 
+                                                specializing in Artificial Intelligence (AI) and 
+                                                6G vehicular networks (V2X). 
+                                                My research focuses on leveraging AI-driven technologies to address challenges in next-generation network management, 
+                                                particularly in the areas of digital twin and multimodal collaborative perception for 6G V2X network management and radio resource management. 
+                                                My recent work includes the development of AI solutions using Vision Transformers for 6G vehicular networks. GPA: 3.96/4.3.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="headingTwo">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                                        href="#collapseTwo" aria-expanded="false"
+                                                        aria-controls="collapseTwo">
+                                                        <strong>IUT MSc/PhD student</strong>
+                                                        <span>2020-2022</span><br
+                                                            style="display: block; content: ''; margin-top: 6px; ">
+                                                            McGill University
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                                aria-labelledby="headingTwo">
+                                                <div class="panel-body">
+                                                    <p>
+                                                        Quebec Inter-University Transfer (IUT) student. Courses: COMP596(A-) ECSE507(A+) ECSE610(A-).
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="headingTwo">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                                        href="#collapseTwo" aria-expanded="false"
+                                                        aria-controls="collapseTwo">
+                                                        <strong>M.Sc.</strong>
+                                                        <span>2020-2021</span><br
+                                                            style="display: block; content: ''; margin-top: 6px; ">
+                                                            ÉTS Montréal
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                                aria-labelledby="headingTwo">
+                                                <div class="panel-body">
+                                                    <p>
+                                                        Wireless Communication, 6G V2X RRM, GPA 3.84/4.3.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="headingThree">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                                                        href="#collapseThree" aria-expanded="false"
+                                                        aria-controls="collapseThree">
+                                                        <strong>Engineering Degree</strong>
+                                                        <span>2017-2020</span><br
+                                                            style="display: block; content: ''; margin-top: 6px; ">
+                                                            École Polytechnique de Tunisie
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                                aria-labelledby="headingThree">
+                                                <div class="panel-body">
+                                                    <p>
+                                                        Main courses: Stochastic Processes, Operational Research, Mathematical Optimization, Numerical Analysis, Data Analysis, Machine Learning, 
+                                                        Signal Processing, Wireless Communication. Graduation Grade: 18/20.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="colorlib-experience" data-section="experience">
+                    <div class="colorlib-narrow-content">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+                                <span class="heading-meta">Experience</span>
+                                <h2 class="colorlib-heading animate-box">Experience</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="timeline-centered">
+                
+                                    <article class="timeline-entry animate-box" data-animate-effect="fadeInRight">
+                                        <div class="timeline-entry-inner">
+                                            <div class="timeline-icon color-1">
+                                                <i class="fa fa-graduation-cap"></i>
+                                            </div>
+                                            <div class="timeline-label">
+                                                <h2>
+                                                    Teaching Assistant <span>Jan. 2024 – Present</span><br>
+                                                    <a href="https://www.etsmtl.ca/" target="_blank">
+                                                        <span>ÉTS Montréal</span>
+                                                    </a>
+                                                </h2>
+                                                <ul>
+                                                    <li>
+                                                        Conducted laboratory and tutorial sessions for ELE462 (S24, H24) and ELE452 (S24).
+                                                    </li>
+                                                    <li>
+                                                        Organized and led a conference on AI for ELE767.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </article>
+                
+                                    <article class="timeline-entry animate-box" data-animate-effect="fadeInLeft">
+                                        <div class="timeline-entry-inner">
+                                            <div class="timeline-icon color-2">
+                                                <i class="fa fa-briefcase"></i>
+                                            </div>
+                                            <div class="timeline-label">
+                                                <h2>
+                                                    AI Research Intern <span>Oct. 2022 – Feb. 2023</span><br>
+                                                    <a href="https://www.jacobb.ai/" target="_blank">
+                                                        <span>JACOBB</span>
+                                                    </a>
+                                                </h2>
+                                                <p>
+                                                    Developed a data-driven property valuation solution for the real estate industry using deep learning as part of a Mitacs Accelerate internship.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </article>
+                
+                                    <article class="timeline-entry animate-box" data-animate-effect="fadeInRight">
+                                        <div class="timeline-entry-inner">
+                                            <div class="timeline-icon color-2">
+                                                <i class="fa fa-briefcase"></i>
+                                            </div>
+                                            <div class="timeline-label">
+                                                <h2>
+                                                    NLP Engineer <span>Jan. 2021 – Aug. 2021</span><br>
+                                                    <a href="https://www.kinhub.com" target="_blank">
+                                                        <span>Kinhub</span>
+                                                    </a>
+                                                </h2>
+                                                <ul>
+                                                    <li>
+                                                        Developed an RASA-based chatbot for healthcare support.
+                                                    </li>
+                                                    <li>
+                                                        Automated the data collection process through web scraping and built and deployed NLP models for AI features.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </article>
+                
+                                    <article class="timeline-entry animate-box" data-animate-effect="fadeInRight">
+                                        <div class="timeline-entry-inner">
+                                            <div class="timeline-icon color-1">
+                                                <i class="fa fa-graduation-cap"></i>
+                                            </div>
+                                            <div class="timeline-label">
+                                                <h2>
+                                                    Visiting Student <span>Feb. 2020 – Jul. 2020</span><br>
+                                                    <a href="https://www.uci.edu/" target="_blank">
+                                                        <span>University of California, Irvine</span>
+                                                    </a>
+                                                </h2>
+                                                <p>
+                                                    Conducted research on AI classifiers’ robustness to adversarial attacks for my bachelor graduation project under the supervision of Professor Zhiying Wang.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </article>
+                
+                                    <article class="timeline-entry animate-box" data-animate-effect="fadeInRight">
+                                        <div class="timeline-entry-inner">
+                                            <div class="timeline-icon color-2">
+                                                <i class="fa fa-briefcase"></i>
+                                            </div>
+                                            <div class="timeline-label">
+                                                <h2>
+                                                    AI Research Intern <span>Sep. 2019 – Jan. 2020</span><br>
+                                                    <a href="https://www.mentor.com" target="_blank">
+                                                        <span>Mentor Graphics</span>
+                                                    </a>
+                                                </h2>
+                                                <p>
+                                                    Developed a graph partitioning optimization solution using deep learning for FPGA-based processor emulation.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </article>
+                
+                                    <article class="timeline-entry animate-box" data-animate-effect="fadeInRight">
+                                        <div class="timeline-entry-inner">
+                                            <div class="timeline-icon color-2">
+                                                <i class="fa fa-briefcase"></i>
+                                            </div>
+                                            <div class="timeline-label">
+                                                <h2>
+                                                    ML Engineer Intern <span>Jun. 2019 – Sep. 2019</span><br>
+                                                    <a href="https://www.axefinance.com" target="_blank">
+                                                        <span>Axefinance</span>
+                                                    </a>
+                                                </h2>
+                                                <p>
+                                                    Developed a credit decision-making solution using machine learning, focusing on the imbalanced data problem.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </article>
+                
+                                    <article class="timeline-entry animate-box" data-animate-effect="fadeInRight">
+                                        <div class="timeline-entry-inner">
+                                            <div class="timeline-icon color-2">
+                                                <i class="fa fa-briefcase"></i>
+                                            </div>
+                                            <div class="timeline-label">
+                                                <h2>
+                                                    Data Science Intern <span>Mar. 2019 – Jun. 2019</span><br>
+                                                    <a href="https://tunisie.pwc.fr/" target="_blank">
+                                                        <span>PwC</span>
+                                                    </a>
+                                                </h2>
+                                                <p>
+                                                    Developed a machine learning-based framework for customer satisfaction analysis and churn detection for a banking institution.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </article>
+                
+                                    <article class="timeline-entry begin animate-box" data-animate-effect="fadeInBottom">
+                                        <div class="timeline-entry-inner">
+                                            <div class="timeline-icon color-none">
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+
+
+                <section class="colorlib-about" data-section="research">
+                    <div class="colorlib-narrow-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
+                                    <div class="col-md-12">
+                                        <div class="about-desc">
+                                            <span class="heading-meta">Research</span>
+                                            <h2 class="colorlib-heading">Research</h2>
+
+                                            <h3>Publications</h3>
+                                            <p>For the most up-to-date list of publications, see my <a
+                                                    href="https://scholar.google.ca/citations?hl=en&user=R-J2efEAAAAJ"
+                                                    target="_blank">Google Scholar profile</a>.</p>
+                                            <table class="researchlist">
+                                                <tr>
+                                                    <td>2024</td>
+                                                    <td>
+                                                        <strong><a
+                                                                href="https://ieeexplore.ieee.org/document/10660494"
+                                                                target="_blank">
+                                                                MVX-ViT: Multimodal Collaborative Perception for 6G V2X Network Management Decisions Using Vision Transformer.</a></strong>
+                                                                G. Gharsallah and G. Kaddoum.
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td>2024</td>
+                                                    <td>
+                                                        <strong><a
+                                                                href="https://ieeexplore.ieee.org/abstract/document/10680020"
+                                                                target="_blank">
+                                                                ViT LoS V2X: Vision Transformers for Environment-aware LoS Blockage Prediction for 6G Vehicular Networks.</a></strong>
+                                                                G. Gharsallah and G. Kaddoum.
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td>2024</td>
+                                                    <td>
+                                                        <strong><a
+                                                                href="https://paperswithcode.com/paper/ai-classifiers-robustness-to-adversarial"
+                                                                target="_blank">
+                                                                Bachelor Thesis: AI Classifiers Robustness to Adversarial Attacks: Manipulating Output of Classifiers by Small Input Perturbations.</a></strong>
+                                                                G. Gharsallah and Z. Wang.
+                                                    </td>
+                                                </tr>
+                                                
+                                                
+                                            </table>
+
+
+                                            <!-- <h3>Invited Talks & Podcasts</h3>
+                                            <table class="invitedtalkslist">
+                                                <tr>
+                                                    <td>2024</td>
+                                                    <td>
+                                                        Consciousness, ineffability, and AI safety &mdash;
+                                                        <i>Mila AI Safety Reading Group</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2023</td>
+                                                    <td>
+                                                        Sampling discrete objects through continuous attractor dynamics &mdash;
+                                                        <i>Mila GFlowNet Reading Group</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                <tr>
+                                                    <td>2023</td>
+                                                    <td>
+                                                        Why can't we describe our conscious experiences? An information theoretic attractor dynamics perspective of ineffability &mdash;
+                                                        <i>Computational Phenomenology Group</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2023</td>
+                                                    <td>
+                                                        <a href="https://www.youtube.com/watch?v=jXEJO_5g0ho"
+                                                        target="_blank">
+                                                        Why can't we describe our conscious experiences? An information theoretic attractor dynamics perspective of ineffability &mdash;
+                                                        <i>Active Inference Institute podcast</i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2023</td>
+                                                    <td>
+                                                        Why can't we describe our conscious experiences? An attractor
+                                                        dynamics perspective of the ineffability of qualia &mdash;
+                                                        <i>University of Toronto guest lecture</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2020</td>
+                                                    <td>
+                                                        How does the brain work? Cognitive science research &mdash;
+                                                        <i>Sabes</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2020</td>
+                                                    <td>
+                                                        Introduction to Programming with Python &mdash; 
+                                                        <i>UofTHacks</i>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <h3>Patents</h3>
+                                            <table class="researchlist" style="margin-bottom: 0em;">
+                                                <tr>
+                                                    <td>2022</td>
+                                                    <td>
+                                                        <strong>System and method for image processing using deep neural
+                                                            networks.</strong>
+                                                        Levinshtein A., Chang C., Phung E., Kezele I., Guo W.,
+                                                        <u>Elmoznino E.</u>, Jiang R., Aarabi P.
+                                                        <i>U.S. Patent No. 11216988</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2021</td>
+                                                    <td>
+                                                        <strong>Image-to-image translation using unpaired data for
+                                                            supervised learning.</strong>
+                                                        <u>Elmoznino E.</u>, Kezele I., Aarabi P.
+                                                        <i>U.S. Patent Application No. 17096774</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2020</td>
+                                                    <td>
+                                                        <strong>System and method for augmented reality using
+                                                            conditional cycle-consistent generative image-to-image
+                                                            translation models.</strong>
+                                                        <u>Elmoznino E.</u>, Ma H., Kezele I., Phung E., Levinshtein A.,
+                                                        Aarabi P.
+                                                        <i>U.S. Patent Application No. 16683398</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2020</td>
+                                                    <td>
+                                                        <strong>Machine image colour extraction and machine image
+                                                            construction using an extracted colour.</strong>
+                                                        <u>Elmoznino E.</u>, Aarabi P., Zhang Y.
+                                                        <i>U.S. Patent Application No. 16854975</i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2020</td>
+                                                    <td>
+                                                        <strong>Automatic image-based skin diagnostics using deep
+                                                            learning.</strong>
+                                                        Jiang R., Ma J., Ma H., <u>Elmoznino E.</u>, Kezele I.,
+                                                        Levinshtein A., Charbit J.,
+                                                        Despois J., Perrot M., Antoinin F., Flament R.S., Parham A.
+                                                        <i>U.S. Patent Application No. 16702895</i>
+                                                    </td>
+                                                </tr>
+                                            </table> -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="colorlib-blog" data-section="projects">
+                    <div class="colorlib-narrow-content">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+                                <span class="heading-meta">Open source</span>
+                                <h2 class="colorlib-heading">Projects</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+                                <div class="blog-entry">
+                                    <a href="https://ghazigh.github.io/MVX" class="blog-img">
+                                        <img src="images/MVX.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com">
+                                    </a>
+                                    <div class="desc">
+                                        <h3><a href="https://ghazigh.github.io/MVX/">MVX</a></h3>
+                                        <p>MVX is the world’s first configurable and scalable co-simulation framework that incorporates 
+                                            realistic physical world simulation with a differentiable accurate ray tracing wireless simulation that 
+                                            generates multi-agent and multimodal datasets for AI-driven digital twin applications in vehicular communication systems.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                </section>
+                
+
+                <section class="colorlib-contact" data-section="contact">
+                    <div class="colorlib-narrow-content">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box"
+                                data-animate-effect="fadeInLeft">
+                                <span class="heading-meta">Get in Touch</span>
+                                <h2 class="colorlib-heading" style="margin-bottom: 1em">Contact</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="colorlib-feature colorlib-feature-sm animate-box"
+                                    data-animate-effect="fadeInLeft" style="margin-bottom: 20px;">
+                                    <div class="colorlib-icon" style="background: none;">
+                                        <i class="fa fa-envelope" style="font-size: 35px;"></i>
+                                    </div>
+                                    <div class="colorlib-text" style="position: relative;
+                                                                      transform: translateY(12%);
+                                                                      padding-left: 87px;">
+                                        <p><a href="mailto:eric.elmoznino@gmail.com"
+                                                target="_blank">gharsallahghazi@gmail.com</a></p>
+                                    </div>
+                                </div>
+
+                                <div class="colorlib-feature colorlib-feature-sm animate-box"
+                                    data-animate-effect="fadeInLeft">
+                                    <div class="colorlib-icon" style="background: none;">
+                                        <i class="fa fa-map-marker" style="font-size: 50px;"></i>
+                                    </div>
+                                    <div class="colorlib-text" style="font-size: 14px;
+                                                               position: relative;
+                                                               transform: translateY(-30%);
+                                                               padding-left: 87px;">
+                                        <p>LaCIME - ÉTS - École de technologie supérieure<br>
+                                            1100 Notre-Dame St W<br>
+                                            Montreal, Quebec H3C 1K3</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div style="min-height: 5em;"></div>
+
             </div>
-            <div class="project-card">
-                <h3>Project 2</h3>
-                <p>Description of project 2.</p>
-                <a href="#" target="_blank">View Project</a>
-            </div>
-            <div class="project-card">
-                <h3>Project 3</h3>
-                <p>Description of project 3.</p>
-                <a href="#" target="_blank">View Project</a>
-            </div>
+            <!-- end:colorlib-main -->
         </div>
-    </section>
+        <!-- end:container-wrap -->
+    </div>
+    <!-- end:colorlib-page -->
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>If you'd like to get in touch, feel free to drop me a message!</p>
-        <form id="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="js/jquery.easing.1.3.js"></script>
+    <!-- jQuery Sticky -->
+    <script src="js/jquery.sticky-kit.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Waypoints -->
+    <script src="js/jquery.waypoints.min.js"></script>
+    <!-- Flexslider -->
+    <script src="js/jquery.flexslider-min.js"></script>
+    <!-- Owl carousel -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- Counters -->
+    <script src="js/jquery.countTo.js"></script>
 
-    <footer>
-        <p>&copy; 2024 Ghazi Gharsallah. All rights reserved.</p>
-    </footer>
+
+    <!-- MAIN JS -->
+    <script src="js/main.js"></script>
+
 </body>
+
 </html>
