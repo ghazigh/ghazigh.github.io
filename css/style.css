@@ -12,20 +12,20 @@
 *
 * ======================================================= */
 body {
-  font-family: "Quicksand", Arial, sans-serif;
+  font-family: "Inter", "Quicksand", Arial, sans-serif;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 1.8;
-  color: rgba(0, 0, 0, 0.7); }
+  font-size: 16px;
+  line-height: 1.7;
+  color: #4a4a4a; }
   @media screen and (max-width: 992px) {
     body {
-      font-size: 16px; } }
+      font-size: 15px; } }
 
 a {
   color: #2c98f0;
-  -webkit-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s; }
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s; }
   a:hover, a:active, a:focus {
     color: #2c98f0;
     outline: none;
@@ -35,10 +35,10 @@ p {
   margin-bottom: 1.5em; }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #000;
-  font-family: "Quicksand", Arial, sans-serif;
-  font-weight: 400;
-  margin: 0 0 30px 0; }
+  color: #222;
+  font-family: "Inter", "Quicksand", Arial, sans-serif;
+  font-weight: 600;
+  margin: 0 0 20px 0; }
 
 figure {
   margin-bottom: 2.5em;
@@ -1452,4 +1452,846 @@ table.invitedtalkslist {
 .invitedtalkslist tr td:nth-child(1) {
   display: block;
   margin-right: 1em;
+}
+/* =======================================================
+*
+* ghazigh.github.io/New Styles for Professional Portfolio
+*
+* ======================================================= */
+
+/* Skills Section */
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.skill-category h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #f2f3f7;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.skill-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-badge {
+    background-color: #f2f3f7;
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.skill-badge:hover {
+    background-color: #2c98f0;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Research Section */
+.research-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.research-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.research-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-color: #2c98f0;
+}
+
+.research-year {
+    font-weight: 700;
+    color: #2c98f0;
+    font-size: 16px;
+    min-width: 50px;
+}
+
+.research-content {
+    flex: 1;
+}
+
+.research-content strong a {
+    color: #333;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.research-content strong a:hover {
+    color: #2c98f0;
+}
+
+.research-authors {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.research-venue {
+    font-size: 13px;
+    color: #888;
+    font-style: italic;
+}
+
+/* General Tweaks */
+#colorlib-aside {
+    background: #fff;
+    border-right: 1px solid #f0f0f0;
+}
+
+#colorlib-aside .author-img {
+    border: 4px solid #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.colorlib-nav-toggle {
+    top: 10px;
+}
+
+
+/* Projects Section Tweaks */
+.blog-entry {
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.blog-entry:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transform: translateY(-5px);
+}
+
+.blog-entry .desc {
+    padding: 20px;
+}
+
+.blog-entry .desc h3 a {
+    color: #333;
+    font-weight: 600;
+}
+
+.blog-entry .desc h3 a:hover {
+    color: #2c98f0;
+}
+
+/* =======================================================
+*
+* ghazigh.github.io/Total Design Refactoring Enhancements
+*
+* ======================================================= */
+
+/* 1. Global Variables & Typography */
+:root {
+    --primary-color: #2c98f0;
+    --secondary-color: #2c3e50;
+    --accent-color: #ecf0f1;
+    --text-color: #333;
+    --light-text: #7f8c8d;
+    --bg-color: #fdfdfd;
+    --sidebar-bg: #f8f9fa;
+    --font-main: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-main);
+    color: var(--secondary-color);
+    letter-spacing: -0.5px;
+}
+
+/* 2. Sidebar Enhancements */
+#colorlib-aside {
+    background: var(--sidebar-bg);
+    border-right: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 2px 0 20px rgba(0,0,0,0.02);
+}
+
+#colorlib-aside .author-img {
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+#colorlib-aside .author-img:hover {
+    transform: scale(1.05);
+}
+
+#colorlib-logo a {
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--secondary-color) !important;
+}
+
+#colorlib-main-menu ul li a {
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 16px;
+    color: var(--light-text);
+}
+
+#colorlib-main-menu ul li.active a {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+#colorlib-main-menu ul li a:after {
+    background-color: var(--primary-color);
+    height: 2px;
+    bottom: 5px;
+}
+
+/* 3. Timeline Redesign (Experience) */
+.timeline-centered:before {
+    background: #e0e0e0;
+    width: 2px;
+    margin-left: 29px;
+}
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon {
+    box-shadow: 0 0 0 4px #fff;
+    background: #fff;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+}
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon i {
+    color: var(--primary-color);
+    font-size: 16px;
+}
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    margin-left: 70px;
+}
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label:after {
+    border-right-color: #fff;
+    border-width: 10px;
+    margin-top: -10px;
+}
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 a {
+    color: var(--secondary-color);
+}
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 span {
+    font-size: 14px;
+    color: var(--light-text);
+    font-weight: 500;
+    opacity: 1;
+    display: block;
+    margin-top: 5px;
+}
+
+/* 4. Accordion Redesign (Education) */
+.panel-default {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    margin-bottom: 20px !important;
+}
+
+.panel-default > .panel-heading {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.panel-default > .panel-heading:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(44, 152, 240, 0.1);
+}
+
+.panel-title > a {
+    display: block;
+    padding: 20px 25px;
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.panel-title > a strong {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.panel-body {
+    border-top: none !important;
+    padding: 20px 25px;
+    background: #fff;
+    color: var(--light-text);
+    line-height: 1.8;
+}
+
+/* 5. Section Headings */
+.heading-meta {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.colorlib-heading {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 3em;
+    position: relative;
+}
+
+.colorlib-heading:after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 50px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* 6. Contact Section */
+.colorlib-feature {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.colorlib-feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-color: var(--primary-color);
+}
+
+.colorlib-feature .colorlib-icon i {
+    color: var(--primary-color);
+}
+
+/* 7. Buttons */
+.btn-primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(44, 152, 240, 0.3);
+}
+
+.btn-primary:hover {
+    background: #228ae6;
+    box-shadow: 0 6px 20px rgba(44, 152, 240, 0.4);
+    transform: translateY(-2px);
+}
+
+
+/* =======================================================
+*
+* ghazigh.github.io/New Design Styles
+*
+* ======================================================= */
+
+/* Reset Main Content Width */
+#colorlib-main {
+    width: 100% !important;
+    float: none !important;
+    padding: 0 !important;
+}
+
+.container-wrap {
+    max-width: 100% !important;
+    padding: 0 !important;
+}
+
+/* Navbar Styles */
+.custom-navbar {
+    background: #fff;
+    border: none;
+    margin-bottom: 0;
+    padding: 20px 40px;
+}
+
+.custom-navbar .navbar-brand {
+    padding: 0;
+    height: auto;
+    line-height: 30px;
+}
+
+.custom-nav-links li a {
+    color: #333 !important;
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.custom-nav-links li a.btn-cta {
+    color: #333 !important;
+    text-decoration: underline !important;
+    font-weight: 600;
+    margin-left: 20px;
+}
+
+/* Hero Section Styles */
+.new-hero-section {
+    padding: 0;
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.vertical-text-col {
+    position: relative;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 50px;
+    border-right: 1px solid #eee;
+}
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    color: #ccc;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.vertical-text-bottom {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    color: #ccc;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.hero-content {
+    padding-top: 50px;
+    padding-left: 80px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 60px;
+    margin-bottom: 80px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 36px;
+    font-weight: 400;
+    color: #333;
+    font-family: "Inter", sans-serif;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.hero-title {
+    font-size: 140px;
+    font-weight: 400;
+    color: #222;
+    line-height: 1;
+    margin-bottom: 20px;
+    font-family: "Inter", sans-serif;
+    letter-spacing: -2px;
+}
+
+.hero-subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 100px;
+    font-weight: 500;
+}
+
+.scroll-down {
+    font-size: 14px;
+    color: #333;
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+.hero-image-col {
+    height: 90vh;
+    padding: 0;
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+}
+
+@media screen and (max-width: 992px) {
+    .hero-title {
+        font-size: 80px;
+    }
+    .hero-content {
+        padding-left: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hero-title {
+        font-size: 60px;
+    }
+    .hero-image-col {
+        height: 400px;
+        margin-top: 30px;
+    }
+    .hero-stats {
+        margin-bottom: 30px;
+        gap: 30px;
+    }
+    .vertical-text-col {
+        display: none;
+    }
+    .custom-navbar {
+        padding: 10px 20px;
+    }
+}
+
+/* =======================================================
+*
+*	Minimal Portfolio Theme Overrides
+*
+* ======================================================= */
+
+:root {
+  --pf-text: #222222;
+  --pf-muted: #7B7B7B;
+  --pf-bg: #F8F8F8;
+  --pf-white: #FFFFFF;
+  --pf-border: #EDEDED;
+}
+
+body {
+  background: var(--pf-white) !important;
+  color: var(--pf-text) !important;
+}
+
+a {
+  color: var(--pf-text) !important;
+}
+
+a:hover,
+a:active,
+a:focus {
+  color: var(--pf-text) !important;
+  opacity: 0.75;
+}
+
+::selection {
+  background: rgba(34, 34, 34, 0.15) !important;
+  color: var(--pf-text) !important;
+}
+
+/* Layout container (matches airy centered content) */
+.colorlib-narrow-content {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+/* Make the header + hero span full viewport width (avoid centered 1170px wrapper) */
+.container-wrap {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+@media screen and (max-width: 768px) {
+  .colorlib-narrow-content {
+    padding: 0 24px;
+  }
+}
+
+/* Consistent section spacing */
+.colorlib-experience,
+.colorlib-skills,
+.colorlib-education,
+.colorlib-blog,
+.colorlib-work,
+.colorlib-about,
+.colorlib-services,
+.colorlib-contact {
+  padding-top: 110px !important;
+  padding-bottom: 110px !important;
+  background: var(--pf-white) !important;
+}
+
+/* Section headers */
+.heading-meta {
+  font-size: 12px !important;
+  letter-spacing: 0.14em !important;
+  color: var(--pf-muted) !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  margin-bottom: 14px !important;
+}
+
+.colorlib-heading {
+  font-family: "Inter", "Quicksand", Arial, sans-serif !important;
+  font-size: 46px !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.02em !important;
+  text-transform: none !important;
+  line-height: 1.15 !important;
+  margin-bottom: 34px !important;
+}
+
+.colorlib-heading:after,
+.colorlib-heading:before {
+  display: none !important;
+}
+
+/* Default text tone */
+p,
+li,
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label p,
+.panel-body,
+.blog-entry .desc,
+.colorlib-feature .colorlib-text {
+  color: var(--pf-muted) !important;
+}
+
+/* Navbar alignment closer to reference */
+.custom-navbar {
+  padding: 26px 40px !important;
+  width: 100%;
+}
+
+.custom-navbar .container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.custom-navbar .navbar-collapse {
+  border: none;
+}
+
+.custom-navbar .custom-nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 26px;
+}
+
+.custom-navbar .custom-nav-links > li {
+  float: none;
+}
+
+.custom-navbar .custom-nav-links li a {
+  padding: 0 !important;
+}
+
+/* Hero tightening to match spacing */
+.new-hero-section .container-fluid {
+  padding-left: 40px;
+  padding-right: 40px;
+  width: 100%;
+}
+
+.new-hero-section {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .new-hero-section .container-fluid {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* Skills badges -> monochrome */
+.skill-category h3 {
+  border-bottom: 1px solid var(--pf-border) !important;
+  color: var(--pf-text) !important;
+  font-family: "Inter", "Quicksand", Arial, sans-serif !important;
+  letter-spacing: -0.01em;
+}
+
+.skill-badge {
+  background-color: var(--pf-bg) !important;
+  border: 1px solid var(--pf-border) !important;
+  color: var(--pf-text) !important;
+}
+
+.skill-badge:hover {
+  background-color: var(--pf-text) !important;
+  color: var(--pf-white) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Accordion (Education) -> minimal cards */
+.panel-heading a {
+  background-color: transparent !important;
+  color: var(--pf-text) !important;
+  border: 1px solid var(--pf-border) !important;
+  border-radius: 12px;
+  font-family: "Inter", "Quicksand", Arial, sans-serif !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.panel-heading a.collapsed {
+  background: transparent !important;
+}
+
+.panel {
+  border: none !important;
+}
+
+.panel-body {
+  border: 1px solid var(--pf-border);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  background: var(--pf-white);
+}
+
+.panel-heading a:after {
+  color: var(--pf-muted) !important;
+}
+
+/* Timeline (Experience) -> neutral */
+.timeline-centered:before {
+  background: var(--pf-border) !important;
+}
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon,
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.color-2,
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.color-3,
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.color-4,
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.color-5,
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon.color-none {
+  background: var(--pf-text) !important;
+  color: var(--pf-white) !important;
+  box-shadow: none !important;
+}
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label {
+  background: var(--pf-bg) !important;
+  border: 1px solid var(--pf-border) !important;
+  border-radius: 14px;
+}
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label:after {
+  border-right-color: var(--pf-bg) !important;
+}
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2,
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2 a {
+  color: var(--pf-text) !important;
+}
+
+/* Projects cards -> softer minimal */
+.blog-entry {
+  border: 1px solid var(--pf-border) !important;
+  border-radius: 16px;
+  background: var(--pf-white) !important;
+  overflow: hidden;
+  box-shadow: none !important;
+}
+
+.blog-entry .desc h3,
+.blog-entry .desc h3 a {
+  color: var(--pf-text) !important;
+  font-family: "Inter", "Quicksand", Arial, sans-serif !important;
+}
+
+.blog-entry .desc span {
+  color: var(--pf-muted) !important;
+}
+
+/* Contact blocks -> minimal */
+.colorlib-feature {
+  border: 1px solid var(--pf-border) !important;
+  border-radius: 16px;
+  background: var(--pf-white) !important;
+  box-shadow: none !important;
+}
+
+.colorlib-feature .colorlib-icon {
+  background: var(--pf-bg) !important;
+}
+
+.colorlib-feature .colorlib-icon i {
+  color: var(--pf-text) !important;
 }

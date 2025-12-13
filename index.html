@@ -26,6 +26,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Animate.css -->
     <link rel="stylesheet" href="css/animate.css">
@@ -57,6 +58,7 @@
 <body>
     <div id="colorlib-page">
         <div class="container-wrap">
+            <!-- 
             <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar"
                 aria-expanded="false" aria-controls="navbar"><i></i></a>
             <aside id="colorlib-aside" role="complementary" class="border js-fullheight">
@@ -93,7 +95,57 @@
                     </div>
                 </nav>
 
-            </aside>
+            </aside> 
+            -->
+
+            <nav class="navbar navbar-default custom-navbar">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <ul class="nav navbar-nav navbar-right custom-nav-links">
+                            <li><a href="#" data-nav-section="about">About</a></li>
+                            <li><a href="#" data-nav-section="skills">Skills</a></li>
+                            <li><a href="#" data-nav-section="education">Education</a></li>
+                            <li><a href="#" data-nav-section="experience">Experience</a></li>
+                            <li><a href="#" data-nav-section="research">Research</a></li>
+                            <li><a href="#" data-nav-section="awards">Awards</a></li>
+                            <li><a href="#" data-nav-section="extracurriculars">Activities</a></li>
+                            <li><a href="#" data-nav-section="projects">Projects</a></li>
+                            <li><a href="#" data-nav-section="contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <section id="new-hero" class="new-hero-section">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-1 hidden-sm hidden-xs vertical-text-col">
+                            <div class="vertical-text">AI Researcher</div>
+                            <div class="vertical-text-bottom">2025</div>
+                        </div>
+                        <div class="col-md-6 hero-content">
+                            <div class="hero-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">+200</span>
+                                    <span class="stat-label">Project completed</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">+50</span>
+                                    <span class="stat-label">Startup raised</span>
+                                </div>
+                            </div>
+                            <h1 class="hero-title">Hello</h1>
+                            <p class="hero-subtitle">— It's Ghazi an AI researcher</p>
+                            <div class="scroll-down">
+                                Scroll down ↓
+                            </div>
+                        </div>
+                        <div class="col-md-5 hero-image-col">
+                            <div class="hero-image" style="background-image: url(images/about.jpg);"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <div id="colorlib-main">
 
@@ -142,11 +194,40 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-                                <p>
-                                    <strong>Programming Languages:</strong> Python, R, C++, SQL<br>
-                                    <strong>Frameworks & Tools:</strong> TensorFlow, PyTorch, LangChain, Git, FastAPI, OpenAI API, AWS (Lambda, EC2)<br>
-                                    <strong>Areas of Expertise:</strong> Agentic AI, Generative AI, ML, DL, RL, Transformers
-                                </p>
+                                <div class="skills-container">
+                                    <div class="skill-category">
+                                        <h3>Programming Languages</h3>
+                                        <div class="skill-badges">
+                                            <span class="skill-badge">Python</span>
+                                            <span class="skill-badge">R</span>
+                                            <span class="skill-badge">C++</span>
+                                            <span class="skill-badge">SQL</span>
+                                        </div>
+                                    </div>
+                                    <div class="skill-category">
+                                        <h3>Frameworks & Tools</h3>
+                                        <div class="skill-badges">
+                                            <span class="skill-badge">TensorFlow</span>
+                                            <span class="skill-badge">PyTorch</span>
+                                            <span class="skill-badge">LangChain</span>
+                                            <span class="skill-badge">Git</span>
+                                            <span class="skill-badge">FastAPI</span>
+                                            <span class="skill-badge">OpenAI API</span>
+                                            <span class="skill-badge">AWS (Lambda, EC2)</span>
+                                        </div>
+                                    </div>
+                                    <div class="skill-category">
+                                        <h3>Areas of Expertise</h3>
+                                        <div class="skill-badges">
+                                            <span class="skill-badge">Agentic AI</span>
+                                            <span class="skill-badge">Generative AI</span>
+                                            <span class="skill-badge">Machine Learning</span>
+                                            <span class="skill-badge">Deep Learning</span>
+                                            <span class="skill-badge">Reinforcement Learning</span>
+                                            <span class="skill-badge">Transformers</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -471,62 +552,52 @@
                                             <p>For the most up-to-date list of publications, see my <a
                                                     href="https://scholar.google.ca/citations?hl=en&user=R-J2efEAAAAJ"
                                                     target="_blank">Google Scholar profile</a>.</p>
-                                            <table class="researchlist">
-                                                <tr>
-                                                    <td>2025</td>
-                                                    <td>
-                                                        <strong><a
-                                                                href="https://ieeexplore.ieee.org/document/11030661"
-                                                                target="_blank">
-                                                                Multimodal Collaborative Perception for Dynamic Channel Prediction in 6G V2X Networks.</a></strong>
-                                                                G. Gharsallah and G. Kaddoum.
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2025</td>
-                                                    <td>
-                                                        <strong><a
-                                                                href="https://ieeexplore.ieee.org/document/11161792"
-                                                                target="_blank">
-                                                                Multimodal Collaborative Perception for 6G V2X Power and Spectrum Management.</a></strong>
-                                                                G. Gharsallah and G. Kaddoum.
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2024</td>
-                                                    <td>
-                                                        <strong><a
-                                                                href="https://ieeexplore.ieee.org/document/10660494"
-                                                                target="_blank">
-                                                                MVX-ViT: Multimodal Collaborative Perception for 6G V2X Network Management Decisions Using Vision Transformer.</a></strong>
-                                                                G. Gharsallah and G. Kaddoum.
-                                                    </td>
-                                                </tr>
+                                            
+                                            <div class="research-list">
+                                                <div class="research-item">
+                                                    <div class="research-year">2025</div>
+                                                    <div class="research-content">
+                                                        <strong><a href="https://ieeexplore.ieee.org/document/11030661" target="_blank">Multimodal Collaborative Perception for Dynamic Channel Prediction in 6G V2X Networks.</a></strong>
+                                                        <div class="research-authors">G. Gharsallah and G. Kaddoum.</div>
+                                                        <div class="research-venue">IEEE Transactions on Machine Learning in Communications and Networking</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="research-item">
+                                                    <div class="research-year">2025</div>
+                                                    <div class="research-content">
+                                                        <strong><a href="https://ieeexplore.ieee.org/document/11161792" target="_blank">Multimodal Collaborative Perception for 6G V2X Power and Spectrum Management.</a></strong>
+                                                        <div class="research-authors">G. Gharsallah and G. Kaddoum.</div>
+                                                        <div class="research-venue">ICC 2025 - IEEE International Conference on Communications</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="research-item">
+                                                    <div class="research-year">2024</div>
+                                                    <div class="research-content">
+                                                        <strong><a href="https://ieeexplore.ieee.org/document/10660494" target="_blank">MVX-ViT: Multimodal Collaborative Perception for 6G V2X Network Management Decisions Using Vision Transformer.</a></strong>
+                                                        <div class="research-authors">G. Gharsallah and G. Kaddoum.</div>
+                                                        <div class="research-venue">IEEE Open Journal of the Computer Society</div>
+                                                    </div>
+                                                </div>
                                                 
-                                                <tr>
-                                                    <td>2023</td>
-                                                    <td>
-                                                        <strong><a
-                                                                href="https://ieeexplore.ieee.org/abstract/document/10680020"
-                                                                target="_blank">
-                                                                ViT LoS V2X: Vision Transformers for Environment-aware LoS Blockage Prediction for 6G Vehicular Networks.</a></strong>
-                                                                G. Gharsallah and G. Kaddoum.
-                                                    </td>
-                                                </tr>
+                                                <div class="research-item">
+                                                    <div class="research-year">2023</div>
+                                                    <div class="research-content">
+                                                        <strong><a href="https://ieeexplore.ieee.org/abstract/document/10680020" target="_blank">ViT LoS V2X: Vision Transformers for Environment-aware LoS Blockage Prediction for 6G Vehicular Networks.</a></strong>
+                                                        <div class="research-authors">G. Gharsallah and G. Kaddoum.</div>
+                                                        <div class="research-venue">IEEE Access</div>
+                                                    </div>
+                                                </div>
                                                 
-                                                <tr>
-                                                    <td>2020</td>
-                                                    <td>
-                                                        <strong><a
-                                                                href="https://paperswithcode.com/paper/ai-classifiers-robustness-to-adversarial"
-                                                                target="_blank">
-                                                                Bachelor Thesis: AI Classifiers Robustness to Adversarial Attacks: Manipulating Output of Classifiers by Small Input Perturbations.</a></strong>
-                                                                G. Gharsallah and Z. Wang.
-                                                    </td>
-                                                </tr>
-                                                
-                                                
-                                            </table>
+                                                <div class="research-item">
+                                                    <div class="research-year">2020</div>
+                                                    <div class="research-content">
+                                                        <strong><a href="https://paperswithcode.com/paper/ai-classifiers-robustness-to-adversarial" target="_blank">Bachelor Thesis: AI Classifiers Robustness to Adversarial Attacks: Manipulating Output of Classifiers by Small Input Perturbations.</a></strong>
+                                                        <div class="research-authors">G. Gharsallah and Z. Wang.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
                                             <!-- <h3>Invited Talks & Podcasts</h3>
