@@ -3166,3 +3166,52 @@ a.cv-org:hover { color: var(--rust-deep) !important; }
   letter-spacing: .08em;
   text-transform: uppercase;
 }
+
+/* =============================================================
+   NAV — index centred in the bar
+   ============================================================= */
+
+@media (min-width: 768px) {
+  body.ai-researcher .brand-nav .container-fluid {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+  }
+  body.ai-researcher .brand-nav .brand-mark { margin-right: 0; grid-column: 1; }
+  body.ai-researcher .brand-nav .navbar-collapse {
+    grid-column: 2;
+    float: none !important;
+    width: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  body.ai-researcher .brand-nav .custom-nav-links {
+    float: none !important;
+    margin: 0 !important;
+    justify-content: center !important;
+    flex-wrap: nowrap;
+  }
+}
+
+/* -------------------------------------------------------------
+   FACTS GRID — separators drawn per cell, so an odd number of
+   facts leaves paper in the gap rather than a phantom tile.
+   ------------------------------------------------------------- */
+
+.facts-grid {
+  gap: 0;
+  background: var(--paper);
+  overflow: hidden;
+}
+.fact { box-shadow: 1px 0 0 var(--line), 0 1px 0 var(--line); }
+
+/* A trailing fact stretches to close its row, so an odd count never
+   leaves an outlined empty tile. */
+@media (min-width: 901px) {
+  .facts-grid .fact:last-child:nth-child(3n + 1) { grid-column: span 3; }
+  .facts-grid .fact:last-child:nth-child(3n + 2) { grid-column: span 2; }
+}
+@media (min-width: 561px) and (max-width: 900px) {
+  .facts-grid .fact:last-child:nth-child(2n + 1) { grid-column: span 2; }
+}
