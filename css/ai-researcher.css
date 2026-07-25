@@ -2846,3 +2846,97 @@ html:not(.js-fx) .section-head::after { transform: scaleX(1); }
   .ticker-sep { width: 5px; height: 5px; }
   .ticker-track { animation-duration: 34s; }
 }
+
+/* =============================================================
+   FIGURE PLATES v2 — tonal, isometric, textured
+   Flat line art read as "clip art"; these are built like engraved
+   technical plates: layered faces, halftone ground, plate chrome.
+   ============================================================= */
+
+/* Plate chrome ------------------------------------------------- */
+.plate-halftone { opacity: .5; }
+.plate-frame {
+  fill: none;
+  stroke: var(--ink);
+  stroke-opacity: .38;
+  stroke-width: 1.2;
+}
+.plate-frame .plate-hair { stroke-opacity: .16; stroke-width: 1; }
+.plate-fig,
+.plate-cap {
+  font-family: var(--f-mono);
+  font-size: 8.6px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  fill: var(--muted);
+  stroke: none;
+}
+.plate-fig { fill: var(--rust); }
+
+/* Tonal fills — the depth ladder. Top faces lightest. ---------- */
+.plate .ft-paper { fill: #F6EFDF; stroke: none; }
+.plate .ft-1 { fill: var(--ink); fill-opacity: .06; stroke: none; }
+.plate .ft-2 { fill: var(--ink); fill-opacity: .14; stroke: none; }
+.plate .ft-3 { fill: var(--ink); fill-opacity: .24; stroke: none; }
+.plate .none-f { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-opacity: .8; }
+
+.plate .fr-1 { fill: var(--rust); fill-opacity: .16; stroke: none; }
+.plate .fr-2 { fill: var(--rust); fill-opacity: .34; stroke: none; }
+.plate .fr-3 { fill: var(--rust); fill-opacity: .62; stroke: none; }
+.plate .fr-solid { fill: url(#pgrad-rust); stroke: none; }
+.plate .fs-2 { fill: var(--slate); fill-opacity: .34; stroke: none; }
+.plate .fs-3 { fill: var(--slate); fill-opacity: .62; stroke: none; }
+.plate .fs-solid { fill: var(--slate); stroke: none; }
+.plate .fk-2 { fill: var(--ink); fill-opacity: .52; stroke: none; }
+.plate .fk-3 { fill: var(--ink); fill-opacity: .74; stroke: none; }
+.plate .fk-solid { fill: var(--ink); stroke: none; }
+
+.plate .hatch-k,
+.plate .hatch-r { stroke: none; }
+
+/* Stroke weights ----------------------------------------------- */
+.plate .w2 { stroke-width: 2; }
+.plate .w3 { stroke-width: 2.8; }
+.plate .ring2 { stroke-width: 1.4; stroke-dasharray: 4 5; fill: none; }
+.plate .orbit-ring { fill: none; stroke: var(--ink); stroke-opacity: .18; stroke-width: 1.2; stroke-dasharray: 3 7; }
+.plate .cl-rust  { fill: var(--rust);  fill-opacity: .10; stroke: var(--rust);  stroke-opacity: .5; stroke-width: 1.2; stroke-dasharray: 5 5; }
+.plate .cl-slate { fill: var(--slate); fill-opacity: .10; stroke: var(--slate); stroke-opacity: .5; stroke-width: 1.2; stroke-dasharray: 5 5; }
+.plate .cl-ink   { fill: var(--ink);   fill-opacity: .07; stroke: var(--ink);   stroke-opacity: .45; stroke-width: 1.2; stroke-dasharray: 5 5; }
+
+.plate-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* Two draw channels so outlines over fills can be staged apart --- */
+.js-fx .plate .fx-draw-1 > *,
+.js-fx .plate .fx-draw-2 > *,
+.js-fx .plate .fx-draw-1,
+.js-fx .plate .fx-grid > *,
+.js-fx .plate .fx-tick > *,
+.js-fx .plate .fx-scanline > * { stroke-dasharray: 1; stroke-dashoffset: 1; }
+
+.js-fx .plate .fx-rise { opacity: 0; transform: translateY(9px); }
+.js-fx .plate .fx-scan > * { opacity: 0; }
+
+.work-card.is-inview .plate .fx-draw-1 > *,
+.work-card.is-inview .plate .fx-draw-2 > *,
+.work-card.is-inview .plate .fx-draw-1,
+.work-card.is-inview .plate .fx-grid > *,
+.work-card.is-inview .plate .fx-tick > *,
+.work-card.is-inview .plate .fx-scanline > * {
+  animation: p-draw var(--fx-slow) var(--ease-out) both;
+}
+.work-card.is-inview .plate .fx-draw-2 > * { animation-delay: 260ms; }
+.work-card.is-inview .plate .fx-rise { animation: p-rise var(--fx-mid) var(--ease-out) both; }
+.work-card.is-inview .plate .fx-scan > * { animation: p-fade var(--fx-slow) var(--ease-out) 620ms both; }
+
+@keyframes p-rise { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: none; } }
+
+/* Sharpen the tiny plate label at the size it actually renders */
+@media (max-width: 900px) {
+  .plate-fig, .plate-cap { font-size: 9.4px; letter-spacing: .12em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-fx .plate .fx-rise,
+  .js-fx .plate .fx-scan > * { opacity: 1 !important; transform: none !important; }
+}
+.plate .drop { stroke: var(--ink); stroke-opacity: .30; stroke-width: 1.2; stroke-dasharray: 2 4; fill: none; }
