@@ -1728,3 +1728,482 @@ body.ai-researcher {
     ) !important;
   background-size: auto, auto, auto, 36px 36px, 36px 36px !important;
 }
+
+
+/* =============================================================
+   CLIENT-FACING LAYER
+   Practice · Engagements · build cards · project brief
+   Appended last so it wins over the sections above.
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   NAV — 10 index entries need a slightly tighter rhythm
+   ------------------------------------------------------------- */
+
+body.ai-researcher .brand-nav .custom-nav-links {
+  gap: 18px !important;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+/* Bootstrap's .nav clearfix pseudo-elements become stray flex items here */
+body.ai-researcher .brand-nav .custom-nav-links::before,
+body.ai-researcher .brand-nav .custom-nav-links::after {
+  content: none !important;
+  display: none !important;
+}
+body.ai-researcher .brand-nav .custom-nav-links > li > a {
+  font-size: 13.5px !important;
+}
+
+@media (max-width: 1200px) {
+  body.ai-researcher .brand-nav .custom-nav-links { gap: 14px !important; }
+  body.ai-researcher .brand-nav .custom-nav-links > li > a { font-size: 12.5px !important; }
+}
+
+/* -------------------------------------------------------------
+   HERO — availability line + wider lede for the new copy
+   ------------------------------------------------------------- */
+
+.hero-lede { max-width: 38ch; margin-bottom: 22px; }
+
+.hero-availability {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  max-width: 44ch;
+  margin: 0 0 34px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--rust);
+  background: rgba(235, 225, 203, 0.42);
+  font-family: var(--f-body);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink-soft) !important;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: dm-rise 900ms var(--ease-out) 620ms forwards;
+}
+.hero-availability .avail-text { flex: 1 1 auto; min-width: 0; }
+.hero-availability strong { color: var(--ink); font-weight: 600; }
+.avail-dot {
+  flex: 0 0 auto;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--moss);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 0 rgba(107, 122, 94, 0.55);
+  animation: avail-pulse 2600ms var(--ease) infinite;
+}
+@keyframes avail-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(107, 122, 94, 0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(107, 122, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(107, 122, 94, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .avail-dot { animation: none; }
+}
+
+/* Third floating action — "Start a project" (base rule pins 70px; widen it) */
+body.ai-researcher .floating-actions .floating-hire {
+  width: auto !important;
+  padding: 0 18px !important;
+  gap: 8px;
+  white-space: nowrap;
+  background: var(--ink) !important;
+  color: var(--paper) !important;
+  border-color: var(--ink) !important;
+}
+body.ai-researcher .floating-actions .floating-hire i { font-size: 15px !important; }
+body.ai-researcher .floating-actions .floating-hire .floating-cv-text {
+  font-family: var(--f-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+body.ai-researcher .floating-actions .floating-hire i,
+body.ai-researcher .floating-actions .floating-hire .floating-cv-text {
+  color: var(--paper) !important;
+}
+body.ai-researcher .floating-actions .floating-hire:hover {
+  background: var(--rust) !important;
+  border-color: var(--rust) !important;
+}
+
+@media (max-width: 768px) {
+  body.ai-researcher .floating-actions .floating-hire { display: none !important; }
+}
+
+/* -------------------------------------------------------------
+   §02 · PRACTICE — capability cards
+   ------------------------------------------------------------- */
+
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.practice-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px 24px 22px;
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--ink);
+  background: rgba(235, 225, 203, 0.28);
+  position: relative;
+  transition: transform 360ms var(--ease), box-shadow 360ms var(--ease),
+              background 360ms var(--ease), border-top-color 360ms var(--ease);
+}
+.practice-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0 var(--ink);
+  background: var(--paper);
+  border-top-color: var(--rust);
+}
+.practice-tag {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.practice-num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--rust);
+  text-transform: uppercase;
+}
+.practice-kind {
+  font-family: var(--f-body);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+}
+.practice-card h3 {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-variation-settings: "SOFT" 50, "opsz" 72;
+  font-size: 25px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 2px 0 0;
+}
+.practice-card p {
+  font-family: var(--f-body);
+  font-size: 14.8px;
+  line-height: 1.58;
+  color: var(--ink-softer) !important;
+  margin: 0;
+}
+.practice-card p em { font-style: italic; color: var(--rust-deep); }
+.practice-items {
+  list-style: none;
+  padding: 14px 0 0;
+  margin: auto 0 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+.practice-items li {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: color 220ms var(--ease), border-color 220ms var(--ease);
+}
+.practice-card:hover .practice-items li {
+  color: var(--ink-soft) !important;
+  border-color: var(--line-strong);
+}
+
+@media (max-width: 1024px) {
+  .practice-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .practice-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+
+/* -------------------------------------------------------------
+   §04 · ENGAGE — engagement ledger
+   ------------------------------------------------------------- */
+
+.engage-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+.engage-row {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 32px;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+  transition: background 280ms var(--ease), padding 280ms var(--ease);
+}
+.engage-row:hover { background: rgba(235, 225, 203, 0.38); padding-left: 12px; }
+
+.engage-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.engage-num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--rust);
+  text-transform: uppercase;
+}
+.engage-head h3 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-variation-settings: "SOFT" 40, "opsz" 72;
+  font-size: 27px;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+.engage-dur {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 4px;
+  padding: 4px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-softer);
+}
+
+.engage-body p {
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-softer) !important;
+  margin: 0 0 16px;
+  max-width: 62ch;
+}
+.engage-deliv {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+.engage-deliv li {
+  position: relative;
+  font-family: var(--f-body);
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--ink) !important;
+  padding: 6px 13px 6px 26px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.engage-deliv li::before {
+  content: "→";
+  position: absolute;
+  left: 10px;
+  color: var(--rust);
+  font-family: var(--f-mono);
+  font-size: 11px;
+}
+
+@media (max-width: 860px) {
+  .engage-row { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* Principles strip */
+.principles {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 28px;
+  margin-top: 48px;
+  padding: 28px 30px;
+  border: 1px solid var(--line-strong);
+  background: rgba(235, 225, 203, 0.4);
+}
+.principles-key {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rust-deep);
+  padding-top: 4px;
+}
+.principles-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 32px;
+}
+.principles-list li {
+  font-family: var(--f-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-softer) !important;
+}
+.principles-list li strong {
+  display: block;
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-variation-settings: "SOFT" 40, "opsz" 36;
+  font-size: 17px;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+@media (max-width: 860px) {
+  .principles { grid-template-columns: 1fr; gap: 16px; padding: 24px; }
+  .principles-list { grid-template-columns: 1fr; }
+}
+
+/* -------------------------------------------------------------
+   §03 · BUILDS — additions to the works grid
+   ------------------------------------------------------------- */
+
+.work-card-wide { grid-column: 1 / -1; }
+
+.work-note {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.work-meta {
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.work-card p .mono {
+  font-family: var(--f-mono);
+  font-size: 0.86em;
+  color: var(--rust-deep);
+}
+.work-card p strong { color: var(--ink); font-weight: 600; }
+.work-card p em { font-style: italic; color: var(--rust-deep); }
+
+@media (max-width: 900px) {
+  .work-card-wide { grid-column: auto; }
+}
+
+/* -------------------------------------------------------------
+   §09 · SUB-HEADINGS inside a merged section
+   ------------------------------------------------------------- */
+
+body.ai-researcher .sub-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-family: var(--f-display) !important;
+  font-weight: 400 !important;
+  font-variation-settings: "SOFT" 40, "opsz" 72;
+  font-size: 26px !important;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--ink) !important;
+  text-transform: none !important;
+  margin: 0 0 20px !important;
+}
+body.ai-researcher .sub-head:not(:first-of-type) { margin-top: 56px !important; }
+.sub-head-num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--rust);
+  text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------
+   §10 · CONTACT — project brief
+   ------------------------------------------------------------- */
+
+.brief-list {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.brief-list li {
+  position: relative;
+  font-family: var(--f-body);
+  font-size: 15.5px;
+  line-height: 1.45;
+  color: var(--ink) !important;
+  padding-left: 22px;
+}
+.brief-list li::before {
+  content: "§";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--rust);
+}
+.brief-note {
+  margin-top: 16px !important;
+  font-size: 13.5px !important;
+  font-style: italic;
+  color: var(--muted) !important;
+}
+.letter-cta {
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.letter-to .letter-email + .letter-email { margin-top: 4px; }
+
+@media (max-width: 700px) {
+  .letter-cta { gap: 12px; }
+}
+
+/* -------------------------------------------------------------
+   MOBILE NAV — Bootstrap collapses the index below 768px and the
+   template ships no toggle button, which left phone visitors with
+   no navigation at all. Show it as a compact wrapped index instead.
+   ------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  body.ai-researcher .brand-nav.custom-navbar { padding: 18px 20px !important; }
+  body.ai-researcher .brand-nav .container-fluid { flex-wrap: wrap; gap: 0; }
+  body.ai-researcher .brand-nav .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    width: 100%;
+    padding: 0 !important;
+    margin: 14px 0 0 !important;
+    border-top: 1px solid var(--line);
+    padding-top: 12px !important;
+  }
+  body.ai-researcher .brand-nav .custom-nav-links {
+    justify-content: flex-start !important;
+    gap: 9px 15px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body.ai-researcher .brand-nav .custom-nav-links > li { margin: 0 !important; }
+  body.ai-researcher .brand-nav .custom-nav-links > li > a {
+    font-size: 12.5px !important;
+    gap: 4px;
+  }
+  body.ai-researcher .brand-nav .custom-nav-links > li > a .nav-num { display: none; }
+  body.ai-researcher .brand-nav .custom-nav-links > li > a::after { bottom: -3px; }
+}

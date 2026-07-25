@@ -437,6 +437,7 @@
   function setupReveals() {
     const targets = document.querySelectorAll(
       '.section-head, .prose-body p, .pullquote, .prose-aside, ' +
+      '.practice-card, .engage-row, .principles, .sub-head, ' +
       '.cap-row, .panel, .chron-entry, .biblio-entry, ' +
       '.honor-list li, .work-card, .letter, .colophon-inner'
     );
