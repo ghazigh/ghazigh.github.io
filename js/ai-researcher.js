@@ -1,7 +1,10 @@
 /* =============================================================
    AI RESEARCHER — interactive layer
    - Neural-field canvas (hero)
-   - Scroll reveals
+   - Scroll reveals & masked headings
+   - Animated figure plates (viewport-gated)
+   - Pointer tilt + cursor spotlight on cards
+   - Sticky nav, scroll & reading progress
    - Magnetic CTAs
    - Date & section tracking
    ============================================================= */
@@ -10,6 +13,13 @@
   'use strict';
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Progressive enhancement: the motion layer keys everything off
+  // .js-fx, so a page without JS renders fully drawn and static.
+  document.documentElement.classList.add('js-fx');
+
+  const coarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  const raf = window.requestAnimationFrame.bind(window);
 
   // =========================================================
   // Today's date in the hero meta block
@@ -461,6 +471,33 @@
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 
     targets.forEach(t => io.observe(t));
+
+    // Safety sweep. IntersectionObserver samples per frame, so a jump
+    // that skips a region in one step (hash link, fast flick, restored
+    // scroll position) can leave elements behind it stuck at opacity 0.
+    // Anything that has ended up above the fold is revealed regardless.
+    let pending = Array.from(targets);
+    let queued = false;
+
+    const sweep = () => {
+      queued = false;
+      if (!pending.length) return;
+      const h = window.innerHeight;
+      pending = pending.filter(el => {
+        if (el.classList.contains('is-inview')) return false;
+        if (el.getBoundingClientRect().top < h) {
+          el.classList.add('is-inview');
+          io.unobserve(el);
+          return false;
+        }
+        return true;
+      });
+      if (!pending.length) window.removeEventListener('scroll', onScroll);
+    };
+
+    const onScroll = () => { if (!queued) { queued = true; raf(sweep); } };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
   }
 
   // =========================================================
@@ -528,13 +565,181 @@
   }
 
   // =========================================================
+  // Masked section headings — wrap each heading so it can slide
+  // up from behind its own baseline.
+  // =========================================================
+  function setupMaskedHeadings() {
+    document.querySelectorAll('.section-head .colorlib-heading').forEach(h => {
+      if (h.querySelector('.h-line')) return;
+      const line = document.createElement('span');
+      line.className = 'h-line';
+      const inner = document.createElement('span');
+      inner.innerHTML = h.innerHTML;
+      line.appendChild(inner);
+      h.innerHTML = '';
+      h.appendChild(line);
+    });
+  }
+
+  // =========================================================
+  // Figure plates — the looping half of each plate only runs
+  // while the card is actually on screen, so eleven diagrams
+  // never animate at once off-view.
+  // =========================================================
+  function setupLivePlates() {
+    const cards = document.querySelectorAll('.work-card');
+    if (!cards.length) return;
+
+    if (prefersReduced || !('IntersectionObserver' in window)) {
+      cards.forEach(c => c.classList.add('is-inview'));
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => e.target.classList.toggle('is-live', e.isIntersecting));
+    }, { rootMargin: '80px 0px 80px 0px', threshold: 0 });
+
+    cards.forEach(c => io.observe(c));
+  }
+
+  // =========================================================
+  // Pointer tilt + cursor spotlight
+  // =========================================================
+  function setupTilt() {
+    if (prefersReduced || coarse) return;
+
+    const MAX = 5; // degrees — restrained on purpose; this is a document, not a toy
+    document.querySelectorAll('.work-card, .practice-card').forEach(card => {
+      let rect = null, queued = false, px = 0, py = 0;
+
+      const measure = () => { rect = card.getBoundingClientRect(); };
+
+      const apply = () => {
+        queued = false;
+        if (!rect) return;
+        const x = (px - rect.left) / rect.width;
+        const y = (py - rect.top) / rect.height;
+        card.style.setProperty('--ry', ((x - 0.5) * MAX * 2).toFixed(2) + 'deg');
+        card.style.setProperty('--rx', ((0.5 - y) * MAX * 2).toFixed(2) + 'deg');
+        card.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+        card.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+      };
+
+      card.addEventListener('pointerenter', (e) => {
+        measure();
+        px = e.clientX; py = e.clientY;
+        card.classList.add('is-tilting');
+        card.style.setProperty('--spot', '1');
+        apply();
+      });
+
+      card.addEventListener('pointermove', (e) => {
+        px = e.clientX; py = e.clientY;
+        if (!queued) { queued = true; raf(apply); }
+      });
+
+      card.addEventListener('pointerleave', () => {
+        card.classList.remove('is-tilting');
+        card.style.setProperty('--spot', '0');
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+        rect = null;
+      });
+    });
+  }
+
+  // =========================================================
+  // Nav: condense + auto-hide, scroll progress, reading rail
+  // =========================================================
+  function setupScrollChrome() {
+    const nav  = document.querySelector('.brand-nav');
+    const bar  = document.querySelector('.scroll-progress');
+    const rail = document.querySelector('.rail-progress span');
+    if (!nav && !bar && !rail) return;
+
+    let last = window.scrollY;
+    let queued = false;
+
+    const update = () => {
+      queued = false;
+      const y = window.scrollY;
+      const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const p = Math.min(1, Math.max(0, y / max));
+
+      if (bar)  bar.style.setProperty('--p', p.toFixed(4));
+      if (rail) rail.style.setProperty('--p', p.toFixed(4));
+
+      if (nav) {
+        nav.classList.toggle('is-stuck', y > 24);
+        // Hide on the way down, bring it back the moment they scroll up.
+        const down = y > last && y > 240;
+        if (!prefersReduced) nav.classList.toggle('is-hidden', down);
+      }
+      last = y;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!queued) { queued = true; raf(update); }
+    }, { passive: true });
+
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  }
+
+  // =========================================================
+  // Metric count-up — only the numeric metrics; "Ph.D." is left
+  // alone rather than mangled into a number.
+  // =========================================================
+  function setupCounters() {
+    const nums = document.querySelectorAll('.metric-num');
+    if (!nums.length) return;
+
+    const run = (el) => {
+      const plus = el.querySelector('.metric-plus');
+      const raw = (el.childNodes[0] && el.childNodes[0].nodeValue || '').trim();
+      const target = parseInt(raw, 10);
+      if (!Number.isFinite(target)) return;
+      const pad = raw.length;
+
+      if (prefersReduced) return;
+
+      const dur = 1100;
+      const t0 = performance.now();
+      const step = (t) => {
+        const k = Math.min(1, (t - t0) / dur);
+        const eased = 1 - Math.pow(1 - k, 3);
+        const v = Math.round(target * eased);
+        el.childNodes[0].nodeValue = String(v).padStart(pad, '0');
+        if (k < 1) raf(step);
+        else if (plus) plus.style.opacity = '1';
+      };
+      if (plus) plus.style.opacity = '0';
+      el.childNodes[0].nodeValue = String(0).padStart(pad, '0');
+      raf(step);
+    };
+
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { run(e.target); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(n => io.observe(n));
+  }
+
+  // =========================================================
   // Boot
   // =========================================================
   function boot() {
     setToday();
+    setupMaskedHeadings();
     setupNeuralCanvas();
     setupPortraitScrubber();
     setupReveals();
+    setupLivePlates();
+    setupTilt();
+    setupScrollChrome();
+    setupCounters();
     setupMagnetic();
     setupSectionTracking();
     setupSmoothScroll();

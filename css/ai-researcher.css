@@ -2290,3 +2290,559 @@ body.ai-researcher .work-card p.work-sub {
   .work-card-feature > .work-meta { grid-column: 1; grid-row: auto; margin-left: 26px; margin-right: 26px; }
   .work-card-feature > .work-sub  { grid-column: 1; grid-row: auto; margin: -4px 26px 4px !important; }
 }
+
+/* =============================================================
+   MOTION LAYER
+   Animated figure plates, pointer-reactive cards, scroll-driven
+   reveals. Every effect below is additive: without JS the page
+   renders fully drawn and static (see the .js-fx guard).
+   ============================================================= */
+
+:root {
+  --fx-fast: 420ms;
+  --fx-mid:  700ms;
+  --fx-slow: 1100ms;
+}
+
+/* -------------------------------------------------------------
+   FIGURE PLATES — palette
+   ------------------------------------------------------------- */
+
+.plate { display: block; width: 100%; height: auto; }
+.plate-bg   { fill: var(--paper-deep); }
+.plate-rule { fill: none; stroke: var(--ink); stroke-opacity: .07; stroke-width: 1; }
+.plate-head { fill: var(--ink); stroke: none; }
+.plate-ink  { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.plate .s-rust  { stroke: var(--rust); }
+.plate .s-slate { stroke: var(--slate); }
+.plate .s-ink   { stroke: var(--ink); }
+.plate .s-paper { stroke: var(--paper); }
+.plate .f-rust  { fill: var(--rust);  stroke: none; }
+.plate .f-slate { fill: var(--slate); stroke: none; }
+.plate .f-ink   { fill: var(--ink);   stroke: none; }
+.plate .f-muted { fill: var(--muted); fill-opacity: .5; stroke: none; }
+.plate .f-paper { fill: var(--paper); }
+
+.plate .faint { stroke-opacity: .5; stroke-width: 1.3; }
+.plate .thin  { stroke-width: 1.5; }
+.plate .bold  { stroke-width: 2.4; }
+.plate .head  { stroke-width: 3; }
+.plate .hexa  { stroke-width: 2.4; }
+.plate .ring  { stroke-width: 1.3; stroke-dasharray: 5 5; }
+.plate .cone  { stroke-width: 1.5; stroke-dasharray: 6 4; }
+.plate .link  { stroke-width: 1.8; stroke-dasharray: 7 5; }
+
+.plate * { transform-box: fill-box; transform-origin: center; }
+/* Halo discs are fill-only; without this they inherit the 2px ink
+   stroke from .plate-ink and read as a grey ring. */
+.plate .fx-halo { stroke: none; }
+.plate .fx-type > * { transform-origin: left center; }
+.plate .fx-flow,
+.plate .fx-flow-soft > * { stroke-dasharray: 7 6; stroke-width: 1.7; }
+.plate .fx-flow-soft > * { stroke-dasharray: 5 5; stroke-width: 1.3; }
+
+/* -------------------------------------------------------------
+   PLATES — resting state (only once JS confirms it can animate)
+   ------------------------------------------------------------- */
+
+.js-fx .plate .fx-draw > *,
+.js-fx .plate .fx-scan > *,
+.js-fx .plate .fx-mesh > *,
+.js-fx .plate .fx-flow-soft > *,
+.js-fx .plate .fx-loop,
+.js-fx .plate .fx-trace { stroke-dasharray: 1; stroke-dashoffset: 1; }
+
+.js-fx .plate .fx-pop,
+.js-fx .plate .fx-cell,
+.js-fx .plate .fx-rank,
+.js-fx .plate .fx-orbit,
+.js-fx .plate .fx-cloud > *,
+.js-fx .plate .fx-solve,
+.js-fx .plate .fx-alert,
+.js-fx .plate .fx-car,
+.js-fx .plate .fx-shutter,
+.js-fx .plate .fx-node,
+.js-fx .plate .fx-core { opacity: 0; }
+
+.js-fx .plate .fx-type > *,
+.js-fx .plate .fx-lane > * { transform: scaleX(0); }
+.js-fx .plate .fx-grow    { transform: scaleY(.05); transform-origin: bottom center; opacity: 0; }
+.js-fx .plate .fx-ring    { transform: scale(.4); opacity: 0; }
+.js-fx .plate .fx-flow    { opacity: 0; }
+.js-fx .plate .fx-halo    { opacity: 0; }
+.js-fx .plate .fx-limbs > *,
+.js-fx .plate .fx-cone,
+.js-fx .plate .fx-link    { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.js-fx .plate .fx-radio > *,
+.js-fx .plate .fx-emit,
+.js-fx .plate .fx-wave,
+.js-fx .plate .fx-dust > * { opacity: 0; }
+
+/* Stagger — one scale for every effect family */
+.plate .fx-d1 { animation-delay: 90ms  !important; }
+.plate .fx-d2 { animation-delay: 200ms !important; }
+.plate .fx-d3 { animation-delay: 330ms !important; }
+.plate .fx-d4 { animation-delay: 470ms !important; }
+.plate .fx-d5 { animation-delay: 610ms !important; }
+.plate .fx-d6 { animation-delay: 760ms !important; }
+
+/* -------------------------------------------------------------
+   PLATES — the reveal choreography, played once on scroll-in
+   ------------------------------------------------------------- */
+
+@keyframes p-draw  { to { stroke-dashoffset: 0; } }
+@keyframes p-pop   { from { opacity: 0; transform: scale(.55); } 70% { transform: scale(1.08); } to { opacity: 1; transform: scale(1); } }
+@keyframes p-type  { to { transform: scaleX(1); } }
+@keyframes p-grow  { to { transform: scaleY(1); opacity: 1; } }
+@keyframes p-ring  { to { transform: scale(1); opacity: 1; } }
+@keyframes p-fade  { to { opacity: 1; } }
+
+.work-card.is-inview .plate .fx-draw > *,
+.work-card.is-inview .plate .fx-scan > *,
+.work-card.is-inview .plate .fx-mesh > *,
+.work-card.is-inview .plate .fx-flow-soft > *,
+.work-card.is-inview .plate .fx-limbs > *,
+.work-card.is-inview .plate .fx-cone,
+.work-card.is-inview .plate .fx-link,
+.work-card.is-inview .plate .fx-loop,
+.work-card.is-inview .plate .fx-trace {
+  animation: p-draw var(--fx-slow) var(--ease-out) both;
+}
+.work-card.is-inview .plate .fx-pop,
+.work-card.is-inview .plate .fx-cell,
+.work-card.is-inview .plate .fx-rank,
+.work-card.is-inview .plate .fx-orbit,
+.work-card.is-inview .plate .fx-cloud > *,
+.work-card.is-inview .plate .fx-solve,
+.work-card.is-inview .plate .fx-alert,
+.work-card.is-inview .plate .fx-car,
+.work-card.is-inview .plate .fx-shutter,
+.work-card.is-inview .plate .fx-node,
+.work-card.is-inview .plate .fx-core {
+  animation: p-pop var(--fx-fast) var(--ease-out) both;
+}
+.work-card.is-inview .plate .fx-type > *,
+.work-card.is-inview .plate .fx-lane > * { animation: p-type var(--fx-mid) var(--ease-out) both; }
+.work-card.is-inview .plate .fx-grow     { animation: p-grow var(--fx-slow) var(--ease-out) 400ms both; }
+.work-card.is-inview .plate .fx-ring     { animation: p-ring var(--fx-mid) var(--ease-out) both; }
+.work-card.is-inview .plate .fx-flow,
+.work-card.is-inview .plate .fx-dust > *,
+.work-card.is-inview .plate .fx-emit,
+.work-card.is-inview .plate .fx-wave,
+.work-card.is-inview .plate .fx-radio > * { animation: p-fade var(--fx-mid) var(--ease-out) 500ms both; }
+
+/* Cloud points scatter in one by one rather than as a block */
+.work-card.is-inview .plate .fx-cloud > *:nth-child(2) { animation-delay: 60ms; }
+.work-card.is-inview .plate .fx-cloud > *:nth-child(3) { animation-delay: 120ms; }
+.work-card.is-inview .plate .fx-cloud > *:nth-child(4) { animation-delay: 180ms; }
+.work-card.is-inview .plate .fx-cloud > *:nth-child(5) { animation-delay: 240ms; }
+.work-card.is-inview .plate .fx-cloud > *:nth-child(6) { animation-delay: 300ms; }
+.work-card.is-inview .plate .fx-type > *:nth-child(2)  { animation-delay: 120ms; }
+.work-card.is-inview .plate .fx-type > *:nth-child(3)  { animation-delay: 240ms; }
+.work-card.is-inview .plate .fx-type > *:nth-child(4)  { animation-delay: 360ms; }
+.work-card.is-inview .plate .fx-lane > *               { animation-duration: 900ms; }
+
+/* -------------------------------------------------------------
+   PLATES — the living loop, only while the card is on screen
+   ------------------------------------------------------------- */
+
+@keyframes p-flow  { to { stroke-dashoffset: -26; } }
+@keyframes p-core  { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.32); } }
+@keyframes p-halo  { 0%, 100% { opacity: .28; transform: scale(.92); } 50% { opacity: .8; transform: scale(1.06); } }
+
+.work-card.is-live .plate .fx-flow          { animation: p-fade var(--fx-mid) both, p-flow 1.5s linear 500ms infinite; }
+.work-card.is-live .plate .fx-flow-soft > * { animation: p-draw var(--fx-slow) var(--ease-out) both, p-flow 2.4s linear 1.1s infinite; }
+.work-card.is-live .plate .fx-core          { animation: p-pop var(--fx-fast) var(--ease-out) both, p-core 2.6s var(--ease) 600ms infinite; }
+.work-card.is-live .plate .fx-halo          { animation: p-halo 2.6s var(--ease) 600ms infinite; }
+
+/* Hover — the plate wakes fully up */
+@keyframes p-scan  { 0% { opacity: .25; } 50% { opacity: 1; } 100% { opacity: .25; } }
+@keyframes p-radio { 0% { opacity: 0; transform: scale(.75); } 40% { opacity: 1; } 100% { opacity: 0; transform: scale(1.25); } }
+@keyframes p-emit  { 0% { transform: translateX(-14px); opacity: .25; } 50% { opacity: 1; } 100% { transform: translateX(14px); opacity: .25; } }
+@keyframes p-wave  { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(2px); } }
+@keyframes p-alert { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.18); } 60% { transform: scale(.96); } }
+@keyframes p-car   { 0% { transform: translateX(0); } 100% { transform: translateX(58px); } }
+@keyframes p-shut  { 0%, 100% { transform: scale(1); } 45% { transform: scale(.82); } }
+@keyframes p-ringr { to { transform: rotate(360deg); } }
+
+.work-card:hover .plate .fx-flow          { animation-duration: var(--fx-mid), 800ms; }
+.work-card:hover .plate .fx-scan > *      { animation: p-draw var(--fx-slow) var(--ease-out) both, p-scan 1.8s var(--ease) infinite; }
+.work-card:hover .plate .fx-radio > *     { animation: p-radio 1.6s var(--ease-out) infinite; }
+.work-card:hover .plate .fx-radio.fx-d2 > * { animation-delay: 300ms; }
+.work-card:hover .plate .fx-emit          { animation: p-emit 2.6s var(--ease) infinite; }
+.work-card:hover .plate .fx-emit.fx-d5    { animation-delay: 220ms; }
+.work-card:hover .plate .fx-emit.fx-d6    { animation-delay: 440ms; }
+.work-card:hover .plate .fx-wave          { animation: p-wave 1.5s var(--ease) infinite; }
+.work-card:hover .plate .fx-alert         { animation: p-alert 1.4s var(--ease) infinite; }
+.work-card:hover .plate .fx-car           { animation: p-pop var(--fx-fast) both, p-car 2.4s var(--ease) 400ms infinite; }
+.work-card:hover .plate .fx-shutter       { animation: p-pop var(--fx-fast) both, p-shut 1.9s var(--ease) infinite; }
+.work-card:hover .plate .fx-ring          { animation: p-ring var(--fx-mid) var(--ease-out) both, p-ringr 26s linear infinite; }
+.work-card:hover .plate .fx-orbit         { animation: p-pop var(--fx-fast) both, p-core 3s var(--ease) infinite; }
+.work-card:hover .plate .fx-orbit.fx-d3   { animation-delay: 0ms, 200ms; }
+.work-card:hover .plate .fx-orbit.fx-d4   { animation-delay: 0ms, 400ms; }
+.work-card:hover .plate .fx-orbit.fx-d5   { animation-delay: 0ms, 600ms; }
+.work-card:hover .plate .fx-orbit.fx-d6   { animation-delay: 0ms, 800ms; }
+.work-card:hover .plate .fx-solve         { animation: p-pop var(--fx-fast) both, p-core 1.8s var(--ease) infinite; }
+
+/* -------------------------------------------------------------
+   CARDS — pointer tilt + cursor spotlight
+   ------------------------------------------------------------- */
+
+.work-card,
+.practice-card {
+  --rx: 0deg; --ry: 0deg; --ty: 0px; --mx: 50%; --my: 50%; --spot: 0;
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, var(--ty), 0);
+  transform-style: preserve-3d;
+  transition: transform 240ms var(--ease), box-shadow 360ms var(--ease), background 360ms var(--ease);
+  will-change: transform;
+}
+.work-card::before,
+.practice-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--spot);
+  background: radial-gradient(340px circle at var(--mx) var(--my), rgba(196, 85, 45, .13), transparent 65%);
+  transition: opacity 300ms var(--ease);
+}
+.work-card.is-tilting,
+.practice-card.is-tilting { transition: box-shadow 360ms var(--ease), background 360ms var(--ease); }
+
+body.ai-researcher .work-card:hover {
+  --ty: -5px;
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, var(--ty), 0);
+  box-shadow: 14px 18px 34px rgba(20, 18, 16, .16), 5px 5px 0 var(--ink);
+  background: var(--paper);
+}
+body.ai-researcher .practice-card:hover {
+  --ty: -5px;
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, var(--ty), 0);
+  box-shadow: 12px 16px 30px rgba(20, 18, 16, .14), 4px 4px 0 var(--ink);
+}
+
+/* Practice card — the rule under the title draws itself on hover */
+.practice-card h3 { position: relative; padding-bottom: 8px; }
+.practice-card h3::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 2px; width: 100%;
+  background: var(--rust);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 520ms var(--ease-out);
+}
+.practice-card:hover h3::after { transform: scaleX(1); }
+.practice-card .practice-num { transition: letter-spacing 380ms var(--ease); }
+.practice-card:hover .practice-num { letter-spacing: 0.34em; }
+
+/* -------------------------------------------------------------
+   NAV — progress line, auto-hide, sliding active marker
+   ------------------------------------------------------------- */
+
+body.ai-researcher .brand-nav.custom-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  background: rgba(241, 234, 217, .82) !important;
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  transition: transform 520ms var(--ease), padding 380ms var(--ease), box-shadow 380ms var(--ease);
+}
+body.ai-researcher .brand-nav.is-stuck {
+  padding-top: 13px !important;
+  padding-bottom: 13px !important;
+  box-shadow: 0 1px 0 var(--line), 0 12px 28px -22px rgba(20, 18, 16, .5);
+}
+body.ai-researcher .brand-nav.is-hidden { transform: translateY(-104%); }
+
+.scroll-progress {
+  position: absolute;
+  left: 0; bottom: -1px;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(var(--p, 0));
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--rust), var(--rust-deep));
+  z-index: 3;
+}
+
+body.ai-researcher .brand-nav .custom-nav-links > li > a .nav-num {
+  transition: opacity 320ms var(--ease), transform 320ms var(--ease);
+}
+body.ai-researcher .brand-nav .custom-nav-links > li > a.nav-active .nav-num {
+  transform: translateY(-3px) scale(1.12);
+}
+
+/* -------------------------------------------------------------
+   RAIL — reading progress
+   ------------------------------------------------------------- */
+
+.rail-progress {
+  position: fixed;
+  left: 21px;
+  top: 0;
+  width: 1px;
+  height: 100vh;
+  background: var(--line);
+  z-index: 900;
+  pointer-events: none;
+}
+.rail-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--rust);
+  transform: scaleY(var(--p, 0));
+  transform-origin: top center;
+}
+@media (max-width: 1200px) { .rail-progress { display: none; } }
+
+/* -------------------------------------------------------------
+   SECTION HEADS — masked reveal
+   ------------------------------------------------------------- */
+
+.js-fx .section-head .colorlib-heading .h-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: .09em;
+}
+.js-fx .section-head .colorlib-heading .h-line > span {
+  display: block;
+  transform: translateY(105%) rotate(2.2deg);
+  transition: transform 900ms var(--ease-out);
+}
+.js-fx .section-head.is-inview .colorlib-heading .h-line > span {
+  transform: none;
+}
+.js-fx .section-head .colorlib-heading .h-line:nth-child(2) > span { transition-delay: 90ms; }
+.js-fx .section-head .colorlib-heading .h-line:nth-child(3) > span { transition-delay: 180ms; }
+
+.section-num { transition: color 400ms var(--ease); }
+.js-fx .section-head .section-num,
+.js-fx .section-head .heading-meta,
+.js-fx .section-head .section-dek {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+}
+.js-fx .section-head.is-inview .section-num,
+.js-fx .section-head.is-inview .heading-meta,
+.js-fx .section-head.is-inview .section-dek { opacity: 1; transform: none; }
+.js-fx .section-head.is-inview .section-dek { transition-delay: 260ms; }
+.js-fx .section-head.is-inview .heading-meta { transition-delay: 60ms; }
+
+/* Hairline that draws across under the section head */
+.section-head { position: relative; border-bottom: none; }
+.section-head::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--line-strong);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1100ms var(--ease-out) 200ms;
+}
+.js-fx .section-head.is-inview::after { transform: scaleX(1); }
+html:not(.js-fx) .section-head::after { transform: scaleX(1); }
+
+/* -------------------------------------------------------------
+   ENGAGE — accent bar + staggered chips
+   ------------------------------------------------------------- */
+
+.engage-row { position: relative; }
+.engage-row::before {
+  content: "";
+  position: absolute;
+  left: -14px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--rust);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 560ms var(--ease-out);
+}
+.engage-row:hover::before { transform: scaleY(1); }
+.engage-deliv li {
+  transition: transform 320ms var(--ease), border-color 320ms var(--ease), background 320ms var(--ease);
+}
+.engage-row:hover .engage-deliv li { border-color: var(--line-strong); transform: translateY(-2px); }
+.engage-row:hover .engage-deliv li:nth-child(2) { transition-delay: 60ms; }
+.engage-row:hover .engage-deliv li:nth-child(3) { transition-delay: 120ms; }
+.engage-dur { transition: background 380ms var(--ease), color 380ms var(--ease), border-color 380ms var(--ease); }
+.engage-row:hover .engage-dur { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* -------------------------------------------------------------
+   MARQUEE — capability ticker
+   ------------------------------------------------------------- */
+
+.ticker {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(235, 225, 203, .45);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 46s linear infinite;
+}
+.ticker:hover .ticker-track { animation-play-state: paused; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+.ticker-group { display: flex; align-items: center; flex: 0 0 auto; }
+.ticker-item {
+  font-family: var(--f-display);
+  font-size: 25px;
+  font-weight: 400;
+  font-variation-settings: "SOFT" 50, "opsz" 60;
+  letter-spacing: -0.015em;
+  color: var(--ink-softer);
+  padding: 0 26px;
+  white-space: nowrap;
+}
+.ticker-item em { font-style: italic; color: var(--rust-deep); }
+.ticker-sep {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--rust);
+  opacity: .55;
+  flex: 0 0 auto;
+}
+
+/* -------------------------------------------------------------
+   HERO — headline mask, sheen, counters
+   ------------------------------------------------------------- */
+
+.js-fx .display-mark .dm-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: .09em;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+.js-fx .display-mark .dm-line > span,
+.js-fx .display-mark .dm-line > em {
+  display: inline-block;
+  transform: translateY(104%) rotate(3deg);
+  animation: dm-mask 1150ms var(--ease-out) forwards;
+}
+.js-fx .display-mark .dm-line-2 > * { animation-delay: 140ms; }
+@keyframes dm-mask { to { transform: none; } }
+
+.metric-num { position: relative; display: inline-block; }
+.metric { transition: transform 420ms var(--ease); }
+.metric:hover { transform: translateY(-4px); }
+.metric:hover .metric-num { color: var(--rust-deep); }
+
+.hero-availability { position: relative; overflow: hidden; }
+.hero-availability::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 252, 244, .58) 50%, transparent 62%);
+  transform: translateX(-120%);
+  animation: sheen 6.5s var(--ease) 2.4s infinite;
+}
+@keyframes sheen { 0% { transform: translateX(-120%); } 26%, 100% { transform: translateX(120%); } }
+
+/* CTA — arrow travels out and back in */
+.cta { overflow: hidden; }
+.cta .cta-arrow { display: inline-block; }
+.cta:hover .cta-arrow { animation: cta-arrow 620ms var(--ease-out); }
+@keyframes cta-arrow {
+  45%  { transform: translateX(16px); opacity: 0; }
+  55%  { transform: translateX(-16px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* -------------------------------------------------------------
+   REVEALS — richer than a fade
+   ------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px) scale(.988);
+  filter: blur(3px);
+  transition: opacity 820ms var(--ease-out), transform 820ms var(--ease-out), filter 820ms var(--ease-out);
+}
+.reveal.is-inview { opacity: 1; transform: none; filter: none; }
+.reveal[data-reveal-delay="1"] { transition-delay: 80ms; }
+.reveal[data-reveal-delay="2"] { transition-delay: 160ms; }
+.reveal[data-reveal-delay="3"] { transition-delay: 240ms; }
+
+/* -------------------------------------------------------------
+   REDUCED MOTION — everything above collapses to a static page
+   ------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .js-fx .plate *,
+  .work-card .plate *,
+  .ticker-track,
+  .hero-availability::after,
+  .cta:hover .cta-arrow {
+    animation: none !important;
+    transition: none !important;
+    stroke-dashoffset: 0 !important;
+    stroke-dasharray: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .js-fx .plate .fx-halo { opacity: .4 !important; }
+  .work-card, .practice-card { transform: none !important; }
+  .work-card::before, .practice-card::before { display: none; }
+  .js-fx .display-mark .dm-line > span,
+  .js-fx .display-mark .dm-line > em,
+  .js-fx .section-head .colorlib-heading .h-line > span { transform: none !important; animation: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .section-head::after { transform: scaleX(1) !important; }
+  .rail-progress, .scroll-progress { display: none; }
+}
+
+/* The section head animates its own parts, so opt it out of the
+   blanket reveal transform while still using .is-inview. */
+.js-fx .section-head.reveal { opacity: 1; transform: none; filter: none; }
+.metric-plus { transition: opacity 320ms var(--ease) 240ms; }
+
+/* -------------------------------------------------------------
+   MOBILE — a sticky nav can't afford two wrapped rows of links,
+   so the index becomes one horizontally scrollable strip.
+   ------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+  body.ai-researcher .brand-nav.custom-navbar { padding: 14px 0 0 !important; }
+  body.ai-researcher .brand-nav .container-fluid { padding: 0 20px !important; }
+  body.ai-researcher .brand-nav .navbar-collapse.collapse {
+    margin: 12px 0 0 !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+  body.ai-researcher .brand-nav .custom-nav-links {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 20px 2px !important;
+    gap: 18px !important;
+    scroll-snap-type: x proximity;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 16px), transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 16px), transparent);
+  }
+  body.ai-researcher .brand-nav .custom-nav-links::-webkit-scrollbar { display: none; }
+  body.ai-researcher .brand-nav .custom-nav-links > li { flex: 0 0 auto; scroll-snap-align: start; }
+  body.ai-researcher .brand-nav.is-stuck { padding-top: 10px !important; }
+
+  .ticker { padding: 16px 0; }
+  .ticker-item { font-size: 18px; padding: 0 18px; }
+  .ticker-sep { width: 5px; height: 5px; }
+  .ticker-track { animation-duration: 34s; }
+}
