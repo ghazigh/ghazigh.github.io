@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300" role="img" aria-label="A satellite images a tree canopy growing into a power line and flags the risk">
+<defs><pattern id="g8" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#141210" stroke-opacity=".07"/></pattern>
+<marker id="a8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0l10 5-10 5z" fill="#141210"/></marker></defs>
+<rect width="480" height="300" fill="#EBE1CB"/><rect width="480" height="300" fill="url(#g8)"/>
+<g fill="none" stroke="#141210" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+<rect x="255" y="28" width="42" height="30" rx="4" stroke-width="2.2"/>
+<path d="M255 43h-34M297 43h34M221 32v22M331 32v22" stroke-width="2.2"/>
+<path d="M258 62l-30 106M294 62l30 106" stroke="#C4552D" stroke-width="1.5" stroke-dasharray="5 5"/>
+<path d="M96 250V148M74 250h44M96 148l-24 13M96 148l24 13M96 178l-24 13M96 178l24 13" stroke-width="2.2"/>
+<path d="M420 250V148M398 250h44M420 148l-24 13M420 148l24 13M420 178l-24 13M420 178l24 13" stroke-width="2.2"/>
+<path d="M118 156h284M118 186h284" stroke-width="1.7"/>
+<path d="M276 250v-58" stroke="#C4552D" stroke-width="2.4"/>
+<circle cx="276" cy="176" r="27" stroke="#C4552D" stroke-width="2.2"/>
+<circle cx="252" cy="196" r="19" stroke="#C4552D" stroke-width="2.2"/>
+<circle cx="300" cy="196" r="19" stroke="#C4552D" stroke-width="2.2"/>
+<circle cx="372" cy="112" r="18" stroke="#C4552D" stroke-width="2.4"/>
+<path d="M372 103v10M372 120v2" stroke="#C4552D" stroke-width="2.6"/>
+</g></svg>

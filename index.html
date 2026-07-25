@@ -440,12 +440,16 @@
                         <div class="works-grid">
 
                             <article class="work-card">
+                                <div class="work-thumb">
+                                    <img src="images/thumbs/lead-agent.svg" alt="Diagram: an incoming message flows into an AI agent, which books a slot on a calendar" class="img-responsive">
+                                </div>
                                 <div class="work-tag">
                                     <span class="work-num">W-01</span>
                                     <span class="work-kind">Agentic · tool-use</span>
                                 </div>
-                                <h3>Lead-response &amp; booking agent</h3>
-                                <p>A conversational agent for local service businesses that answers an inbound lead in seconds, qualifies them, and <strong>books the appointment</strong> — through real tools, not scripted replies: <span class="mono">get_availability</span>, <span class="mono">save_lead</span>, <span class="mono">book_appointment</span> (with double-booking protection) and <span class="mono">escalate_to_human</span> for emergencies and out-of-scope requests. Everything business-specific lives in one JSON config, so re-skinning it to a new tenant takes minutes; a deterministic replay mode reproduces any conversation exactly for demos and regression tests.</p>
+                                <h3>An AI receptionist that books jobs</h3>
+                                <p class="work-sub">Lead-response agent · local service businesses</p>
+                                <p>Answers an inbound lead in seconds, qualifies them, and <strong>books the appointment</strong> — through real tools, not scripted replies: <span class="mono">get_availability</span>, <span class="mono">save_lead</span>, <span class="mono">book_appointment</span> (with double-booking protection) and <span class="mono">escalate_to_human</span>. Everything business-specific lives in one JSON config, so re-skinning it to a new client takes minutes, and a deterministic replay mode reproduces any conversation exactly for demos and regression tests.</p>
                                 <div class="work-meta">
                                     <span>Python · Claude API · tool-use · multi-tenant</span>
                                     <span class="work-note">Private · demo on request</span>
@@ -453,12 +457,16 @@
                             </article>
 
                             <article class="work-card">
+                                <div class="work-thumb">
+                                    <img src="images/thumbs/news-agent.svg" alt="Diagram: news documents feed an agent checked by a critic, producing a market signal" class="img-responsive">
+                                </div>
                                 <div class="work-tag">
                                     <span class="work-num">W-02</span>
                                     <span class="work-kind">Multi-agent · finance</span>
                                 </div>
-                                <h3>Agentic News System</h3>
-                                <p>A multi-agent platform that autonomously reads financial news and turns it into investable signals. A planner decomposes a macro question into research tasks, tool-using agents gather evidence from news, filings and market data, and a reflective critic agent challenges the draft thesis — arguing the other side — before anything is surfaced to a human analyst. The critic is the point: it's what turns a plausible narrative into one that has survived an attack.</p>
+                                <h3>An AI analyst for financial news</h3>
+                                <p class="work-sub">Agentic News System</p>
+                                <p>A planner breaks a macro question into research tasks, tool-using agents gather evidence from news, filings and market data, and a critic agent argues the other side before anything reaches a human analyst. The critic is the point — it turns a plausible narrative into one that has survived an attack.</p>
                                 <div class="work-meta">
                                     <span>Python · LangGraph · Azure OpenAI · MCP</span>
                                     <span class="work-note">Private · walkthrough on request</span>
@@ -466,25 +474,33 @@
                             </article>
 
                             <article class="work-card">
+                                <div class="work-thumb">
+                                    <img src="images/thumbs/paper-agents.svg" alt="Diagram: three specialist agents assembling the sections of a paper" class="img-responsive">
+                                </div>
                                 <div class="work-tag">
                                     <span class="work-num">W-03</span>
                                     <span class="work-kind">Multi-agent · RAG</span>
                                 </div>
-                                <h3>Research AI — a multi-agent paper factory</h3>
-                                <p>A platform where five specialized agents co-write an academic paper section by section: a <em>Logic Architect</em> structures the argument, a <em>Research Scout</em> gathers citations and evidence, a <em>Scientific Writer</em> drafts against that evidence, and a <em>Topic Manager</em> keeps the thread coherent. An orchestration service resolves the section pipeline, commits status transitions before long agent calls so the UI can stream progress, and runs the whole plan on a background worker. Lab "rulebooks" let each research group enforce its own style.</p>
+                                <h3>AI that drafts research papers</h3>
+                                <p class="work-sub">Research AI</p>
+                                <p>Five specialists co-write a paper section by section: a <em>Logic Architect</em> structures the argument, a <em>Research Scout</em> gathers citations, a <em>Scientific Writer</em> drafts against that evidence. Status flips are committed before long agent calls so the UI can stream progress, and the whole plan runs on a background worker. Lab rulebooks let each group enforce its own style.</p>
                                 <div class="work-meta">
-                                    <span>FastAPI · OpenAI · Angular 17 · SQLAlchemy · D3</span>
+                                    <span>FastAPI · OpenAI · Angular 17 · SQLAlchemy</span>
                                     <span class="work-note">Private · demo on request</span>
                                 </div>
                             </article>
 
                             <article class="work-card">
+                                <div class="work-thumb">
+                                    <img src="images/thumbs/mecai.svg" alt="Diagram: a photo taken on a phone returns a ranked list of likely faults" class="img-responsive">
+                                </div>
                                 <div class="work-tag">
                                     <span class="work-num">W-04</span>
                                     <span class="work-kind">Multimodal · RAG · mobile</span>
                                 </div>
-                                <h3>MecAI — diagnostic assistant for mechanics</h3>
-                                <p>Photo plus symptom description in, a ranked diagnosis out — built for solo automotive mechanics who don't have a dealership's diagnostic tooling. Behind it sits a Python ingestion pipeline that scrapes, curates, chunks and embeds domain sources (NHTSA complaint data, practitioner forums) with deterministic document IDs so re-running an upsert is always safe and versioned. Shipped as an Expo mobile app on a Hono API running on Cloud Run, with an admin console for curating the knowledge base.</p>
+                                <h3>Car repair diagnosis from a photo</h3>
+                                <p class="work-sub">MecAI · for solo mechanics</p>
+                                <p>Photo plus symptoms in, a ranked diagnosis out — for mechanics without a dealership's diagnostic tooling. Behind it, a pipeline scrapes, curates, chunks and embeds domain sources (NHTSA complaints, practitioner forums) with deterministic document IDs, so re-running an upsert is always safe and versioned.</p>
                                 <div class="work-meta">
                                     <span>Expo · Hono · Cloud Run · Firestore · Azure OpenAI</span>
                                     <span class="work-note">Private · demo on request</span>
@@ -492,12 +508,16 @@
                             </article>
 
                             <article class="work-card">
+                                <div class="work-thumb">
+                                    <img src="images/thumbs/realai.svg" alt="Diagram: five agents arranged around a house, each handling one task" class="img-responsive">
+                                </div>
                                 <div class="work-tag">
                                     <span class="work-num">W-05</span>
                                     <span class="work-kind">Vertical agents · GTM</span>
                                 </div>
-                                <h3>RealAI — five agents for Québec real estate</h3>
-                                <p>Not a chatbot bolted onto a brokerage, but five agents that each own one job in a courtier's workflow: off-portal prospecting, speed-to-lead voice response, listing content generation, Bill&nbsp;96 French-language compliance, and expired-listing recapture. Bilingual FR/EN by construction — a regulatory requirement in Québec, not a feature — and designed to sit on top of the CRM the client already uses rather than replace it.</p>
+                                <h3>Five AI agents for real-estate brokers</h3>
+                                <p class="work-sub">RealAI · Québec market</p>
+                                <p>Not a chatbot bolted onto a brokerage — five agents that each own one job: off-portal prospecting, speed-to-lead voice response, listing content, Bill&nbsp;96 French-language compliance, and expired-listing recapture. Bilingual FR/EN by construction, because in Québec that's a regulation, not a feature.</p>
                                 <div class="work-meta">
                                     <span>Next.js · agent workflows · voice · FR/EN</span>
                                     <span class="work-note">Private · demo on request</span>
@@ -505,29 +525,33 @@
                             </article>
 
                             <article class="work-card">
+                                <div class="work-thumb">
+                                    <img src="images/thumbs/datalith.svg" alt="Diagram: scattered databases unified into a graph and served through one gateway" class="img-responsive">
+                                </div>
                                 <div class="work-tag">
                                     <span class="work-num">W-06</span>
                                     <span class="work-kind">Data for agents · platform</span>
                                 </div>
-                                <h3>Datalith — the agent-ready data layer</h3>
-                                <p>A product thesis built on the single biggest reason agent programs stall: the data isn't ready. Datalith maps an entire data estate into one enterprise knowledge graph, scores it with an <em>Agent-Readiness Score</em>, serves it through a governed MCP-native gateway with per-agent identity and full audit, and then mines the graph for the agentic workflows that data makes possible — each with ROI attached. Full market research, competitive landscape, product strategy and GTM plan, plus a working landing page and investor deck.</p>
+                                <h3>Make company data usable by AI agents</h3>
+                                <p class="work-sub">Datalith</p>
+                                <p>Built on the biggest reason agent programs stall: the data isn't ready. Datalith maps a whole data estate into one knowledge graph, scores it with an <em>Agent-Readiness Score</em>, serves it through a governed MCP gateway with per-agent identity and full audit, then mines the graph for the agentic workflows that data makes possible — each with ROI attached.</p>
                                 <div class="work-meta">
                                     <span>Knowledge graph · MCP · governance · strategy</span>
                                     <span class="work-note">Private · deck on request</span>
                                 </div>
                             </article>
 
-
-                            <article class="work-card work-card-feature">
+                            <article class="work-card">
+                                <a href="https://ghazigh.github.io/3d-research/" class="work-thumb" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/thumbs/vis3d.svg" alt="Diagram: thousands of papers plotted as clustered points in three-dimensional space" class="img-responsive">
+                                </a>
                                 <div class="work-tag">
                                     <span class="work-num">W-07</span>
                                     <span class="work-kind">Embeddings · 3D · public</span>
                                 </div>
-                                <a href="https://ghazigh.github.io/3d-research/" class="work-image" target="_blank" rel="noopener noreferrer">
-                                    <img src="images/3d-research.jpg" alt="IEEE Vis Explorer — 3D research paper visualizer" class="img-responsive">
-                                </a>
-                                <h3><a href="https://ghazigh.github.io/3d-research/" target="_blank" rel="noopener noreferrer">IEEE Vis Explorer</a></h3>
-                                <p>An interactive 3D map of <strong>37 000+</strong> IEEE papers across <strong>9 topical clusters</strong> — and a compact demonstration of a full semantic pipeline: harvest from OpenAlex, embed every abstract with <span class="mono">text-embedding-3-large</span>, project 3 072 dimensions down to three with UMAP, cluster with HDBSCAN, then label each cluster by combining c-TF-IDF keywords with an LLM refinement pass. The result is a decade of research you can <em>fly</em> through, colour by topic or citation impact, filter by journal, and search in real time.</p>
+                                <h3><a href="https://ghazigh.github.io/3d-research/" target="_blank" rel="noopener noreferrer">37 000 research papers, mapped in 3D</a></h3>
+                                <p class="work-sub">IEEE Vis Explorer</p>
+                                <p>A decade of research you can <em>fly</em> through. Harvest from OpenAlex, embed every abstract with <span class="mono">text-embedding-3-large</span>, project 3 072 dimensions down to three with UMAP, cluster with HDBSCAN, then label each cluster with c-TF-IDF keywords refined by an LLM. Colour by topic or citation impact, filter by journal, search in real time.</p>
                                 <div class="work-meta">
                                     <span>React · TypeScript · Three.js · UMAP · HDBSCAN</span>
                                     <a class="work-link" href="https://github.com/ghazigh/3d-research" target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
@@ -535,55 +559,67 @@
                             </article>
 
                             <article class="work-card">
+                                <div class="work-thumb">
+                                    <img src="images/thumbs/satlab.svg" alt="Diagram: a satellite images a tree canopy growing into a power line and flags the risk" class="img-responsive">
+                                </div>
                                 <div class="work-tag">
                                     <span class="work-num">W-08</span>
                                     <span class="work-kind">Geospatial AI · digital twin</span>
                                 </div>
-                                <h3>Sat Lab — satellite AI for grid resilience</h3>
-                                <p>A deep-tech product line aimed at utilities: satellite imagery plus AI to predict where vegetation will cause outages, route trim crews, and assess post-storm damage — then render those predictions inside a live digital twin of the network. Four PRDs spanning smart-environment twins, utility vegetation management, an urban-canopy twin that merges the two, and a dual-use multi-domain fusion variant; with an MVP split into a digital-twin core service, a vegetation service, and a shared contracts package.</p>
+                                <h3>Satellites that predict power outages</h3>
+                                <p class="work-sub">Sat Lab · vegetation intelligence</p>
+                                <p>Satellite imagery plus AI to predict where trees will bring down a power line, route the trim crews, and assess post-storm damage — then render the predictions inside a live digital twin of the network. Four PRDs and an MVP split into a twin core service, a vegetation service and a shared contracts package.</p>
                                 <div class="work-meta">
-                                    <span>Python · PostGIS · geospatial ML · CesiumJS · Unreal</span>
+                                    <span>Python · PostGIS · geospatial ML · CesiumJS</span>
                                     <span class="work-note">Private · PRDs on request</span>
                                 </div>
                             </article>
 
                             <article class="work-card">
+                                <div class="work-thumb">
+                                    <img src="images/thumbs/gen6g.svg" alt="Diagram: a scene and a mobility pattern turned into synthetic radio traces" class="img-responsive">
+                                </div>
                                 <div class="work-tag">
                                     <span class="work-num">W-09</span>
                                     <span class="work-kind">Generative AI · 6G</span>
                                 </div>
-                                <h3>Generative 6G V2X traffic</h3>
-                                <p>A generative digital twin for the vehicular radio channel: given a scene and a mobility pattern, it synthesises plausible time-varying channel traces that would be expensive — or simply impossible — to collect in the real world. Built as a stress-test harness, so perception and radio-resource-management policies can be evaluated against conditions the dataset never contained.</p>
+                                <h3>Realistic 6G network data, generated</h3>
+                                <p class="work-sub">Generative V2X traffic</p>
+                                <p>Give it a street scene and a mobility pattern and it synthesises plausible time-varying radio traces that would be expensive — or impossible — to collect for real. Built as a stress-test harness, so perception and resource-management policies can be judged against conditions the dataset never contained.</p>
                                 <div class="work-meta">
                                     <span>PyTorch · Diffusion · SUMO · Ray Tracing</span>
                                     <span class="work-note">Private · walkthrough on request</span>
                                 </div>
                             </article>
 
-
-                            <article class="work-card work-card-wide">
+                            <article class="work-card">
+                                <div class="work-thumb">
+                                    <img src="images/thumbs/arc.svg" alt="Diagram: a coloured grid puzzle transformed into its correct output grid" class="img-responsive">
+                                </div>
                                 <div class="work-tag">
                                     <span class="work-num">W-10</span>
                                     <span class="work-kind">Reasoning agents · eval discipline</span>
                                 </div>
-                                <h3>ARC Prize 2026 — reasoning under hard constraints</h3>
-                                <p>A monorepo for three ARC Prize entries, and my favourite example of engineering discipline around agents. Kaggle submissions run fully offline, so the workspace is split into packages the solver <em>cannot</em> escape: the submission packages depend only on an offline-safe core of primitives — grids, augmentation, datasets, evaluation, budget accounting, seeding, observability — and can never import the hosted-API development tooling. That boundary isn't a convention; it's enforced by a test that fails the build if anyone crosses it. Deterministic seeding and explicit compute budgets make every run reproducible.</p>
+                                <h3>AI that solves visual puzzles</h3>
+                                <p class="work-sub">ARC Prize 2026</p>
+                                <p>Three competition entries, and my favourite example of discipline around agents. Kaggle runs fully offline, so the workspace is split into packages the solver <em>cannot</em> escape — submissions depend only on an offline-safe core and can never import the hosted-API tooling. That boundary isn't a convention; a test fails the build if anyone crosses it.</p>
                                 <div class="work-meta">
-                                    <span>Python · uv workspace · offline-safe packaging · eval harness</span>
+                                    <span>Python · uv workspace · offline-safe packaging</span>
                                     <span class="work-note">Private · walkthrough on request</span>
                                 </div>
                             </article>
 
                             <article class="work-card work-card-feature">
+                                <a href="https://ghazigh.github.io/MVX/" class="work-thumb" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/thumbs/mvx.svg" alt="Diagram: two cars on a road exchanging sensor data over a radio link" class="img-responsive">
+                                </a>
                                 <div class="work-tag">
                                     <span class="work-num">W-11</span>
                                     <span class="work-kind">Research flagship · public</span>
                                 </div>
-                                <a href="https://ghazigh.github.io/MVX" class="work-image" target="_blank" rel="noopener noreferrer">
-                                    <img src="images/MVX.jpg" alt="MVX co-simulation framework" class="img-responsive">
-                                </a>
-                                <h3><a href="https://ghazigh.github.io/MVX/" target="_blank" rel="noopener noreferrer">MVX — multimodal V2X co-simulation</a></h3>
-                                <p>To my knowledge, the first configurable, scalable co-simulation framework that marries a realistic physics-based world simulator with a <em>differentiable</em> ray-traced wireless simulator. MVX generates multi-agent, multimodal datasets (camera, LiDAR, radar, channel) for AI-driven digital twins in vehicular communications — the backbone of most of my Ph.D. experiments, and the substrate on which collaborative perception research can actually be reproduced.</p>
+                                <h3><a href="https://ghazigh.github.io/MVX/" target="_blank" rel="noopener noreferrer">A simulator for connected cars</a></h3>
+                                <p class="work-sub">MVX · multimodal V2X co-simulation</p>
+                                <p>To my knowledge the first configurable, scalable co-simulation framework marrying a physics-based world simulator with a <em>differentiable</em> ray-traced wireless simulator. MVX generates multi-agent, multimodal datasets — camera, LiDAR, radar, channel — for AI-driven digital twins in vehicular communications. It's the backbone of most of my Ph.D. experiments.</p>
                                 <div class="work-meta">
                                     <span>Python · CARLA · Ray Tracing · Gym · Multi-agent</span>
                                     <a class="work-link" href="https://ghazigh.github.io/MVX/" target="_blank" rel="noopener noreferrer">Visit project ↗</a>

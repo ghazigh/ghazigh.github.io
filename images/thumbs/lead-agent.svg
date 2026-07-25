@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300" role="img" aria-label="Incoming message flows into an AI agent which fills a slot on a calendar">
+<defs><pattern id="g1" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#141210" stroke-opacity=".07"/></pattern>
+<marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0l10 5-10 5z" fill="#141210"/></marker></defs>
+<rect width="480" height="300" fill="#EBE1CB"/><rect width="480" height="300" fill="url(#g1)"/>
+<g fill="none" stroke="#141210" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+<rect x="26" y="96" width="104" height="76" rx="8"/><path d="M52 172l-6 22 24-22"/>
+<path d="M50 122h56M50 142h34" stroke="#C4552D"/>
+<path d="M142 134H192" marker-end="url(#a1)" stroke-width="1.6"/>
+<path d="M240 100l46 26v52l-46 26-46-26v-52z" stroke="#C4552D" stroke-width="2.4"/>
+<circle cx="240" cy="152" r="7" fill="#C4552D" stroke="none"/>
+<path d="M240 145v-18M226 160l-14 8M254 160l14 8" stroke="#C4552D" stroke-width="1.6"/>
+<circle cx="240" cy="123" r="4" fill="#C4552D" stroke="none"/><circle cx="209" cy="172" r="4" fill="#C4552D" stroke="none"/><circle cx="271" cy="172" r="4" fill="#C4552D" stroke="none"/>
+<path d="M292 134H340" marker-end="url(#a1)" stroke-width="1.6"/>
+<rect x="352" y="96" width="104" height="96" rx="6"/><path d="M352 120h104"/>
+<path d="M378 96v-14M430 96v-14"/>
+<path d="M378 120v72M404 120v72M430 120v72M352 144h104M352 168h104" stroke-width="1" stroke-opacity=".45"/>
+<rect x="404" y="144" width="26" height="24" fill="#C4552D" stroke="none"/>
+<path d="M410 156l5 5 9-10" stroke="#EBE1CB" stroke-width="2.2"/>
+</g></svg>

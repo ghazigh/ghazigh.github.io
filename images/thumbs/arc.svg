@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300" role="img" aria-label="A coloured grid puzzle is transformed into its correct output grid">
+<defs><pattern id="g10" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#141210" stroke-opacity=".07"/></pattern>
+<marker id="a10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0l10 5-10 5z" fill="#141210"/></marker></defs>
+<rect width="480" height="300" fill="#EBE1CB"/><rect width="480" height="300" fill="url(#g10)"/>
+<g fill="none" stroke="#141210" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+<rect x="34" y="80" width="140" height="140" rx="4" stroke-width="2"/>
+<path d="M34 127h140M34 174h140M81 80v140M128 80v140" stroke-width="1.2" stroke-opacity=".55"/>
+<rect x="36" y="82" width="43" height="43" fill="#C4552D" stroke="none"/>
+<rect x="130" y="129" width="43" height="43" fill="#3E5970" stroke="none"/>
+<rect x="83" y="176" width="43" height="43" fill="#141210" stroke="none"/>
+<path d="M190 150H208" marker-end="url(#a10)" stroke-width="1.6"/>
+<path d="M240 128l0 44" stroke="#C4552D" stroke-width="0"/>
+<rect x="306" y="80" width="140" height="140" rx="4" stroke-width="2"/>
+<path d="M306 127h140M306 174h140M353 80v140M400 80v140" stroke-width="1.2" stroke-opacity=".55"/>
+<rect x="402" y="82" width="43" height="43" fill="#C4552D" stroke="none"/>
+<rect x="308" y="129" width="43" height="43" fill="#3E5970" stroke="none"/>
+<rect x="355" y="176" width="43" height="43" fill="#141210" stroke="none"/>
+<circle cx="240" cy="150" r="24" stroke="#C4552D" stroke-width="2.2"/>
+<path d="M232 150l6 7 11-14" stroke="#C4552D" stroke-width="2.4"/>
+</g></svg>

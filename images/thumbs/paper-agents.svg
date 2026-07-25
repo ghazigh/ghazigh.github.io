@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300" role="img" aria-label="Three specialist agents assemble the sections of a paper">
+<defs><pattern id="g3" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#141210" stroke-opacity=".07"/></pattern>
+<marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0l10 5-10 5z" fill="#141210"/></marker></defs>
+<rect width="480" height="300" fill="#EBE1CB"/><rect width="480" height="300" fill="url(#g3)"/>
+<g fill="none" stroke="#141210" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+<circle cx="70" cy="80" r="24" stroke="#C4552D" stroke-width="2.2"/><circle cx="70" cy="80" r="6" fill="#C4552D" stroke="none"/>
+<circle cx="70" cy="150" r="24" stroke="#C4552D" stroke-width="2.2"/><circle cx="70" cy="150" r="6" fill="#C4552D" stroke="none"/>
+<circle cx="70" cy="220" r="24" stroke="#C4552D" stroke-width="2.2"/><circle cx="70" cy="220" r="6" fill="#C4552D" stroke="none"/>
+<path d="M96 84l52 22M96 150h52M96 216l52-22" stroke-width="1.4" stroke-dasharray="5 5"/>
+<rect x="164" y="46" width="126" height="208" rx="4" fill="#EBE1CB"/>
+<path d="M182 78h90M182 96h90M182 114h64" stroke="#C4552D" stroke-width="1.8"/>
+<path d="M182 144h90M182 160h90M182 176h90M182 192h58" stroke-width="1.4" stroke-opacity=".5"/>
+<path d="M300 150H326" marker-end="url(#a3)" stroke-width="1.6"/>
+<rect x="336" y="46" width="126" height="208" rx="4"/>
+<path d="M354 68h58" stroke="#C4552D" stroke-width="3"/>
+<path d="M354 92h90M354 108h90M354 124h90M354 140h72M354 164h90M354 180h90M354 196h90M354 212h48" stroke-width="1.4" stroke-opacity=".55"/>
+</g></svg>

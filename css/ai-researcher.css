@@ -2207,3 +2207,86 @@ body.ai-researcher .sub-head:not(:first-of-type) { margin-top: 56px !important; 
   body.ai-researcher .brand-nav .custom-nav-links > li > a .nav-num { display: none; }
   body.ai-researcher .brand-nav .custom-nav-links > li > a::after { bottom: -3px; }
 }
+
+/* -------------------------------------------------------------
+   §03 · BUILD THUMBNAILS — every card leads with a figure plate
+   ------------------------------------------------------------- */
+
+.work-card { padding: 0 0 22px; gap: 10px; }
+
+.work-thumb {
+  display: block;
+  margin: 0;
+  border-bottom: 1px solid var(--line-strong);
+  background: var(--paper-deep);
+  background-image: none !important;
+  overflow: hidden;
+  line-height: 0;
+}
+.work-thumb img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 600ms var(--ease);
+}
+.work-card:hover .work-thumb img { transform: scale(1.035); }
+
+/* Everything after the plate keeps the old inner padding */
+.work-card > .work-tag,
+.work-card > h3,
+.work-card > p,
+.work-card > .work-meta { margin-left: 26px; margin-right: 26px; }
+.work-card > .work-tag { margin-top: 18px; }
+
+body.ai-researcher .work-card h3 { font-size: 26px; line-height: 1.12; }
+
+body.ai-researcher .work-card p.work-sub {
+  font-family: var(--f-mono) !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+  margin: -4px 26px 4px !important;
+  line-height: 1.4;
+}
+
+/* Feature card — plate beside the text rather than above it */
+.work-card-feature {
+  padding: 0 0 22px;
+  grid-template-columns: minmax(240px, 400px) 1fr;
+  grid-template-rows: auto auto auto 1fr auto;
+  column-gap: 34px;
+  row-gap: 10px;
+  align-items: start;
+}
+.work-card-feature > .work-thumb {
+  grid-column: 1;
+  grid-row: 1 / span 5;
+  border-bottom: none;
+  border-right: 1px solid var(--line-strong);
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+/* Never crop a diagram — centre it in the column instead */
+.work-card-feature > .work-thumb img { height: auto; object-fit: contain; }
+.work-card-feature > .work-tag  { grid-column: 2; grid-row: 1; margin: 22px 30px 0 0; }
+.work-card-feature > h3         { grid-column: 2; grid-row: 2; margin: 0 30px 0 0; }
+.work-card-feature > .work-sub  { grid-column: 2; grid-row: 3; margin: -4px 30px 4px 0 !important; }
+.work-card-feature > p          { grid-column: 2; grid-row: 4; margin: 0 30px 0 0; }
+.work-card-feature > .work-meta { grid-column: 2; grid-row: 5; margin: 0 30px 0 0; }
+
+@media (max-width: 900px) {
+  .work-card-feature { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .work-card-feature > .work-thumb {
+    grid-column: 1; grid-row: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .work-card-feature > .work-thumb img { height: auto; }
+  .work-card-feature > .work-tag  { grid-column: 1; grid-row: auto; margin: 18px 26px 0; }
+  .work-card-feature > h3,
+  .work-card-feature > p,
+  .work-card-feature > .work-meta { grid-column: 1; grid-row: auto; margin-left: 26px; margin-right: 26px; }
+  .work-card-feature > .work-sub  { grid-column: 1; grid-row: auto; margin: -4px 26px 4px !important; }
+}

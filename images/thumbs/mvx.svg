@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300" role="img" aria-label="Two cars on a road exchange sensor data over a radio link">
+<defs><pattern id="g11" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#141210" stroke-opacity=".07"/></pattern>
+<marker id="a11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0l10 5-10 5z" fill="#141210"/></marker></defs>
+<rect width="480" height="300" fill="#EBE1CB"/><rect width="480" height="300" fill="url(#g11)"/>
+<g fill="none" stroke="#141210" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+<path d="M20 218h440M20 106h440" stroke-width="2"/>
+<path d="M20 162h44M96 162h44M172 162h44M248 162h44M324 162h44M400 162h44" stroke-width="1.6" stroke-opacity=".5"/>
+<g stroke-width="2.2">
+<path d="M64 204v-24l15-19h47l15 19v24z"/><circle cx="86" cy="204" r="8"/><circle cx="120" cy="204" r="8"/>
+<path d="M83 181h40" stroke-opacity=".45"/></g>
+<g stroke-width="2.2">
+<path d="M326 134v-24l15-19h47l15 19v24z"/><circle cx="348" cy="134" r="8"/><circle cx="382" cy="134" r="8"/>
+<path d="M345 111h40" stroke-opacity=".45"/></g>
+<path d="M156 176l64-34 64 34-64 34z" stroke="#3E5970" stroke-width="1.5" stroke-dasharray="6 4"/>
+<path d="M104 154c46-58 190-58 236-4" stroke="#C4552D" stroke-width="1.8" stroke-dasharray="7 5"/>
+<circle cx="104" cy="154" r="5.5" fill="#C4552D" stroke="none"/>
+<circle cx="340" cy="150" r="5.5" fill="#C4552D" stroke="none"/>
+<path d="M104 132c-9 8-9 22 0 30M126 128c11 12 11 34 0 46" stroke="#C4552D" stroke-width="1.6"/>
+<path d="M340 128c9 8 9 22 0 30M318 124c-11 12-11 34 0 46" stroke="#C4552D" stroke-width="1.6"/>
+</g></svg>

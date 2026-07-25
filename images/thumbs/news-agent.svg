@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300" role="img" aria-label="News documents feed an agent that a critic checks, producing a market signal">
+<defs><pattern id="g2" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#141210" stroke-opacity=".07"/></pattern>
+<marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0l10 5-10 5z" fill="#141210"/></marker></defs>
+<rect width="480" height="300" fill="#EBE1CB"/><rect width="480" height="300" fill="url(#g2)"/>
+<g fill="none" stroke="#141210" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+<rect x="24" y="70" width="76" height="96" rx="5"/><rect x="34" y="60" width="76" height="96" rx="5" fill="#EBE1CB"/>
+<path d="M46 84h52M46 100h52M46 116h34" stroke="#C4552D" stroke-width="1.6"/>
+<path d="M122 110H178" marker-end="url(#a2)" stroke-width="1.6"/>
+<path d="M226 74l40 23v46l-40 23-40-23V97z" stroke="#C4552D" stroke-width="2.4"/>
+<circle cx="226" cy="120" r="6" fill="#C4552D" stroke="none"/>
+<path d="M186 130c-34 16-34 74 8 82 40 8 60-16 58-38" stroke="#3E5970" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#a2)"/>
+<circle cx="214" cy="222" r="21" stroke="#3E5970" stroke-width="2.2"/>
+<path d="M205 222l6 7 12-15" stroke="#3E5970" stroke-width="2.2"/>
+<path d="M274 120H326" marker-end="url(#a2)" stroke-width="1.6"/>
+<path d="M336 200V80" stroke-width="1.6"/><path d="M336 200h124" stroke-width="1.6"/>
+<path d="M348 178l24-26 22 18 26-42 26-16" stroke="#C4552D" stroke-width="2.4"/>
+<circle cx="446" cy="112" r="5" fill="#C4552D" stroke="none"/>
+</g></svg>
