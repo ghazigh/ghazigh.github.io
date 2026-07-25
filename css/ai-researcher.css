@@ -3215,3 +3215,145 @@ a.cv-org:hover { color: var(--rust-deep) !important; }
 @media (min-width: 561px) and (max-width: 900px) {
   .facts-grid .fact:last-child:nth-child(2n + 1) { grid-column: span 2; }
 }
+
+/* =============================================================
+   PACKAGES — the three things a client can buy
+   ============================================================= */
+
+.pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  align-items: stretch;
+}
+
+.pkg-card {
+  --rx: 0deg; --ry: 0deg; --ty: 0px; --mx: 50%; --my: 50%; --spot: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 28px 24px;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  border-top: 3px solid var(--ink);
+  position: relative;
+  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, var(--ty), 0);
+  transition: transform 240ms var(--ease), box-shadow 360ms var(--ease),
+              border-top-color 360ms var(--ease), background 360ms var(--ease);
+}
+.pkg-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--spot);
+  background: radial-gradient(320px circle at var(--mx) var(--my), rgba(196, 85, 45, .13), transparent 65%);
+  transition: opacity 300ms var(--ease);
+}
+.pkg-card:hover {
+  --ty: -6px;
+  border-top-color: var(--rust);
+  box-shadow: 14px 18px 34px rgba(20, 18, 16, .15), 5px 5px 0 var(--ink);
+}
+
+.pkg-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.pkg-num {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-variation-settings: "SOFT" 40, "opsz" 72;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--rust);
+}
+.pkg-kind {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 5px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.pkg-card:hover .pkg-kind { color: var(--ink-soft); border-color: var(--line-strong); }
+
+body.ai-researcher .pkg-card h3 {
+  font-family: var(--f-display) !important;
+  font-weight: 500 !important;
+  font-variation-settings: "SOFT" 50, "opsz" 96;
+  font-size: 27px;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--ink) !important;
+  margin: 0 0 12px !important;
+}
+
+.pkg-promise {
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--ink-soft) !important;
+  margin: 0 0 10px !important;
+}
+.pkg-for {
+  font-family: var(--f-body);
+  font-style: italic;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--muted) !important;
+  margin: 0 0 18px !important;
+}
+
+.pkg-includes {
+  list-style: none;
+  padding: 18px 0 0;
+  margin: 0 0 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pkg-includes li {
+  position: relative;
+  padding-left: 22px;
+  font-family: var(--f-body);
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: var(--ink-softer) !important;
+}
+.pkg-includes li::before {
+  content: "\2192";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--rust);
+}
+
+.pkg-foot {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line-strong);
+}
+.pkg-dur {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-softer);
+}
+
+@media (max-width: 1000px) { .pkg-grid { grid-template-columns: 1fr; gap: 20px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pkg-card { transform: none !important; }
+  .pkg-card::before { display: none; }
+}

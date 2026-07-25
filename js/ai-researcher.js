@@ -447,7 +447,7 @@
   function setupReveals() {
     const targets = document.querySelectorAll(
       '.section-head, .prose-body p, .pullquote, .prose-aside, ' +
-      '.practice-card, .engage-row, .principles, .sub-head, ' +
+      '.practice-card, .pkg-card, .engage-row, .principles, .sub-head, ' +
       '.cap-row, .panel, .chron-entry, .biblio-entry, ' +
       '.honor-list li, .work-card, .letter, .colophon-inner'
     );
@@ -609,7 +609,7 @@
     if (prefersReduced || coarse) return;
 
     const MAX = 5; // degrees — restrained on purpose; this is a document, not a toy
-    document.querySelectorAll('.work-card, .practice-card').forEach(card => {
+    document.querySelectorAll('.work-card, .practice-card, .pkg-card').forEach(card => {
       let rect = null, queued = false, px = 0, py = 0;
 
       const measure = () => { rect = card.getBoundingClientRect(); };
