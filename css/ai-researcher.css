@@ -2209,7 +2209,11 @@ body.ai-researcher .sub-head:not(:first-of-type) { margin-top: 56px !important; 
 }
 
 /* -------------------------------------------------------------
-   §03 · BUILD THUMBNAILS — every card leads with a figure plate
+   §03 · BUILD THUMBNAILS — two fragments of the real interface,
+   tilted in space over a field tinted with the project's accent.
+   Images live in images/projects/ (see the README there): each
+   card reads <slug>-a.jpg for the back slab and <slug>-b.jpg for
+   the front one. Swap a file, the thumbnail changes.
    ------------------------------------------------------------- */
 
 .work-card { padding: 0 0 22px; gap: 10px; }
@@ -2223,13 +2227,84 @@ body.ai-researcher .sub-head:not(:first-of-type) { margin-top: 56px !important; 
   overflow: hidden;
   line-height: 0;
 }
-.work-thumb img {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 600ms var(--ease);
+
+.thumb-field {
+  --thumb-accent: var(--rust-deep);
+  --thumb-accent-soft: rgba(196, 85, 45, .16);
+  position: relative;
+  aspect-ratio: 8 / 5.4;
+  overflow: hidden;
+  perspective: 1100px;
+  background:
+    radial-gradient(120% 92% at 18% 6%, var(--thumb-accent-soft), transparent 62%),
+    linear-gradient(158deg, var(--paper), var(--paper-dark));
 }
-.work-card:hover .work-thumb img { transform: scale(1.035); }
+.thumb-rules {
+  position: absolute;
+  inset: 0;
+  opacity: .55;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.thumb-slab {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  line-height: 0;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, .72);
+  box-shadow:
+    0 22px 38px -18px rgba(46, 36, 24, .62),
+    0 4px 10px -6px rgba(46, 36, 24, .38);
+  transition: transform 820ms var(--ease-out), box-shadow 820ms var(--ease-out);
+  backface-visibility: hidden;
+}
+.thumb-slab img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.thumb-slab-back {
+  left: 10%; top: 8%; width: 66%; height: 66%;
+  transform: rotateX(9deg) rotateY(-13deg) rotateZ(-1.5deg);
+}
+.thumb-slab-front {
+  left: 39%; top: 31%; width: 57%; height: 61%;
+  transform: rotateX(7deg) rotateY(-11deg) rotateZ(1deg);
+}
+.work-card:hover .thumb-slab-back  { transform: rotateX(5deg) rotateY(-8deg) translate3d(-7px, -6px, 16px); }
+.work-card:hover .thumb-slab-front { transform: rotateX(4deg) rotateY(-7deg) translate3d(7px, 3px, 34px); }
+
+.thumb-cap,
+.thumb-chip {
+  position: absolute;
+  z-index: 5;
+  font-family: var(--f-mono);
+  font-size: 9.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.thumb-cap {
+  left: 14px; bottom: 13px;
+  color: var(--muted);
+  background: rgba(241, 234, 217, .74);
+  border-radius: 2px;
+  padding: 4px 6px;
+  margin: -4px -6px;
+}
+.thumb-chip {
+  right: 14px; top: 14px;
+  color: var(--thumb-accent);
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, .55);
+}
 
 /* Everything after the plate keeps the old inner padding */
 .work-card > .work-tag,
@@ -2253,7 +2328,7 @@ body.ai-researcher .work-card p.work-sub {
 /* Feature card — plate beside the text rather than above it */
 .work-card-feature {
   padding: 0 0 22px;
-  grid-template-columns: minmax(240px, 400px) 1fr;
+  grid-template-columns: minmax(320px, 0.95fr) 1fr;
   grid-template-rows: auto auto auto 1fr auto;
   column-gap: 34px;
   row-gap: 10px;
@@ -2265,11 +2340,12 @@ body.ai-researcher .work-card p.work-sub {
   border-bottom: none;
   border-right: 1px solid var(--line-strong);
   align-self: stretch;
-  display: flex;
-  align-items: center;
+  display: block;
 }
-/* Never crop a diagram — centre it in the column instead */
-.work-card-feature > .work-thumb img { height: auto; object-fit: contain; }
+/* The feature collage fills its column instead of sitting in a band */
+.work-card-feature > .work-thumb .thumb-field { aspect-ratio: auto; height: 100%; min-height: 440px; }
+.work-card-feature > .work-thumb .thumb-slab-back  { left: 6%;  top: 10%; width: 74%; height: 52%; }
+.work-card-feature > .work-thumb .thumb-slab-front { left: 26%; top: 42%; width: 70%; height: 50%; }
 .work-card-feature > .work-tag  { grid-column: 2; grid-row: 1; margin: 22px 30px 0 0; }
 .work-card-feature > h3         { grid-column: 2; grid-row: 2; margin: 0 30px 0 0; }
 .work-card-feature > .work-sub  { grid-column: 2; grid-row: 3; margin: -4px 30px 4px 0 !important; }
@@ -2283,7 +2359,9 @@ body.ai-researcher .work-card p.work-sub {
     border-right: none;
     border-bottom: 1px solid var(--line-strong);
   }
-  .work-card-feature > .work-thumb img { height: auto; }
+  .work-card-feature > .work-thumb .thumb-field { aspect-ratio: 8 / 5.4; height: auto; min-height: 0; }
+  .work-card-feature > .work-thumb .thumb-slab-back  { left: 10%; top: 8%;  width: 66%; height: 66%; }
+  .work-card-feature > .work-thumb .thumb-slab-front { left: 39%; top: 31%; width: 57%; height: 61%; }
   .work-card-feature > .work-tag  { grid-column: 1; grid-row: auto; margin: 18px 26px 0; }
   .work-card-feature > h3,
   .work-card-feature > p,
@@ -2797,6 +2875,10 @@ html:not(.js-fx) .section-head::after { transform: scaleX(1); }
     transform: none !important;
   }
   .js-fx .plate .fx-halo { opacity: .4 !important; }
+  /* Collage slabs keep their static tilt; only the movement stops */
+  .thumb-slab { transition: none !important; }
+  .work-card:hover .thumb-slab-back  { transform: rotateX(9deg) rotateY(-13deg) rotateZ(-1.5deg); }
+  .work-card:hover .thumb-slab-front { transform: rotateX(7deg) rotateY(-11deg) rotateZ(1deg); }
   .work-card, .practice-card { transform: none !important; }
   .work-card::before, .practice-card::before { display: none; }
   .js-fx .display-mark .dm-line > span,

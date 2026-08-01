@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Panel generator — project thumbnail slabs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Newsreader:opsz,wght@6..72,300..600&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Surfaces used to generate the interface slabs for projects that cannot be
+   screenshotted. Each .panel is captured at 900x600 and written to
+   images/projects/<id>.jpg */
+:root {
+  --ink:#141210; --ink-soft:#2B2722; --muted:#5F584B;
+  --paper:#F7F2E7; --paper-2:#EFE7D6; --edge:#DCCFB3;
+  --rust:#C4552D; --rust-deep:#9B3E1A; --slate:#3E5970; --moss:#6B7A5E;
+  --line:rgba(20,18,16,.13); --line-soft:rgba(20,18,16,.07);
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --disp:"Fraunces",Georgia,serif;
+  --body:"Newsreader",Georgia,serif;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:#8A8175; display:flex; flex-wrap:wrap; gap:24px; padding:24px; font-family:var(--body); }
+.panel {
+  width:900px; height:600px; background:#fff; color:var(--ink);
+  position:relative; overflow:hidden; padding:34px 38px; display:flex; flex-direction:column;
+}
+.ph { display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--line); padding-bottom:14px; }
+.ph .t { font-family:var(--disp); font-size:27px; font-weight:500; letter-spacing:-.01em; }
+.ph .m { font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+.pill { font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; padding:5px 11px; border-radius:999px; border:1px solid currentColor; line-height:1; }
+.pill.rust { color:var(--rust); } .pill.moss { color:var(--moss); } .pill.slate { color:var(--slate); }
+
+/* table */
+table { width:100%; border-collapse:collapse; font-family:var(--mono); font-size:14px; margin-top:6px; }
+th { text-align:left; font-weight:500; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); padding:14px 0 10px; border-bottom:1px solid var(--line); }
+td { padding:13px 0; border-bottom:1px solid var(--line-soft); color:var(--ink-soft); }
+td.k { color:var(--ink); font-weight:500; }
+.bar { height:6px; width:130px; background:var(--paper-2); border-radius:3px; overflow:hidden; display:inline-block; vertical-align:middle; margin-right:10px; }
+.bar i { display:block; height:100%; background:var(--rust); }
+.bar.slate i { background:var(--slate); }
+.bar.moss i { background:var(--moss); }
+
+/* chat / transcript */
+.turn { margin-top:16px; }
+.who { font-family:var(--mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.said { font-size:19px; line-height:1.45; }
+.tools { margin-top:12px; border-left:2px solid var(--rust); padding:2px 0 2px 14px; font-family:var(--mono); font-size:13px; color:var(--ink-soft); }
+.tools div { display:flex; justify-content:space-between; padding:4px 0; }
+.tools b { font-weight:500; color:var(--ink); }
+.tools span { color:var(--muted); }
+
+/* stat row */
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:auto; padding-top:20px; border-top:1px solid var(--line); }
+.stat .n { font-family:var(--disp); font-size:34px; line-height:1; }
+.stat .n small { font-size:16px; color:var(--muted); }
+.stat .l { font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-top:7px; }
+
+/* canvas-ish areas */
+.canvas { flex:1; margin-top:18px; position:relative; background:var(--paper); border:1px solid var(--line); overflow:hidden; }
+.canvas.dark { background:#131417; border-color:#26282D; }
+.grid-bg { position:absolute; inset:0; background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px); background-size:36px 36px; }
+.cap { position:absolute; left:14px; bottom:12px; font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.canvas.dark .cap { color:rgba(240,236,226,.55); }
+
+/* arc grids */
+.arc { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px; height:100%; padding-top:16px; }
+.arc .pair { display:flex; align-items:center; gap:40px; }
+.arc .g { display:grid; gap:3px; }
+.arc .c { width:28px; height:28px; border-radius:2px; }
+.arrow { font-family:var(--mono); font-size:26px; color:var(--rust); }
+.arc-lab { position:absolute; top:14px; left:14px; font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+
+/* phone */
+.phone { position:absolute; left:46px; top:34px; width:214px; height:400px; border-radius:24px; background:#15171B; padding:11px; box-shadow:0 26px 50px -22px rgba(30,22,12,.6); }
+.phone .scr { width:100%; height:100%; border-radius:16px; overflow:hidden; background:#22262C; position:relative; }
+.phone .photo { position:absolute; inset:0; background:
+  radial-gradient(70% 50% at 40% 30%, #6C7480, transparent 70%),
+  linear-gradient(160deg,#3A4048,#20242A 70%); }
+.phone .box { position:absolute; border:2px solid #E4A159; border-radius:3px; }
+.phone .tagx { position:absolute; font-family:var(--mono); font-size:9px; letter-spacing:.1em; color:#15171B; background:#E4A159; padding:2px 5px; border-radius:2px; }
+.faults { margin-left:296px; }
+.fault { display:flex; align-items:center; gap:14px; padding:15px 0; border-bottom:1px solid var(--line-soft); }
+.fault .r { font-family:var(--mono); font-size:12px; color:var(--rust); width:22px; }
+.fault .n { flex:1; font-size:17px; }
+.fault .p { font-family:var(--mono); font-size:13px; color:var(--muted); }
+
+/* charts */
+.spark { display:flex; align-items:flex-end; gap:5px; height:100%; padding:22px 20px 34px; }
+.spark i { flex:1; background:linear-gradient(180deg,var(--rust),rgba(196,85,45,.18)); border-radius:2px 2px 0 0; }
+.traces { position:absolute; inset:0; }
+
+/* =========================================================
+   Dark analyst console (W-08 · Agentic News System)
+   ========================================================= */
+.dk {
+  --bg:#0B0E13; --card:#121722; --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.05);
+  --fg:#E6EAF0; --mut:#7E8798; --blue:#4C8DFF; --green:#35C08A; --amber:#E5A63C; --red:#E2564C;
+  --ui:-apple-system,"Helvetica Neue",Arial,sans-serif;
+  background:var(--bg); color:var(--fg); padding:0; font-family:var(--ui);
+  display:flex; flex-direction:column;
+}
+.dk .dk-bar {
+  display:flex; align-items:center; gap:16px; padding:0 20px; height:46px;
+  border-bottom:1px solid var(--line); background:#0E131B; flex:none;
+}
+.dk .dk-brand { display:flex; align-items:center; gap:8px; font-weight:600; font-size:14px; letter-spacing:-.01em; }
+.dk .dk-mark { width:12px; height:12px; border-radius:3px; background:linear-gradient(140deg,var(--blue),#8E6BFF); }
+.dk .dk-crumb { font-family:var(--mono); font-size:11px; color:var(--mut); letter-spacing:.04em; }
+.dk .dk-live {
+  margin-left:auto; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--green); display:flex; align-items:center; gap:6px;
+}
+.dk .dk-live::before { content:""; width:6px; height:6px; border-radius:50%; background:currentColor; }
+.dk .dk-live.amber { color:var(--amber); }
+
+.dk .dk-body { flex:1; display:grid; grid-template-columns:210px 1fr 168px; min-height:0; }
+.dk .dk-col { padding:14px 16px; min-width:0; display:flex; flex-direction:column; }
+.dk .dk-plan { border-right:1px solid var(--line); }
+.dk .dk-side { border-left:1px solid var(--line); background:#0E131B; }
+.dk .dk-h {
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--mut); display:flex; align-items:baseline; gap:8px; margin-bottom:10px;
+}
+.dk .dk-h2 { margin-top:16px; }
+.dk .dk-count { color:rgba(126,135,152,.7); letter-spacing:.08em; }
+
+.dk .dk-steps { list-style:none; margin:0; padding:0; position:relative; }
+.dk .dk-steps::before { content:""; position:absolute; left:4px; top:6px; bottom:8px; width:1px; background:var(--line); }
+.dk .dk-steps li { position:relative; padding:0 0 12px 18px; }
+.dk .dk-steps li::before {
+  content:""; position:absolute; left:0; top:4px; width:9px; height:9px; border-radius:50%;
+  background:var(--bg); border:2px solid var(--mut);
+}
+.dk .dk-steps li.ok::before   { border-color:var(--green); background:var(--green); }
+.dk .dk-steps li.run::before  { border-color:var(--blue);  background:var(--blue); box-shadow:0 0 0 4px rgba(76,141,255,.18); }
+.dk .dk-steps li.wait::before { border-color:rgba(126,135,152,.5); }
+.dk .dk-steps b { display:block; font-size:11.5px; font-weight:600; line-height:1.3; }
+.dk .dk-steps span { font-family:var(--mono); font-size:9.5px; color:var(--mut); }
+.dk .dk-steps li.wait b, .dk .dk-steps li.wait span { color:var(--mut); font-weight:500; }
+
+.dk .dk-tools div { display:flex; justify-content:space-between; gap:8px; padding:5px 0; border-bottom:1px solid var(--line-2); font-family:var(--mono); font-size:10px; }
+.dk .dk-tools b { font-weight:500; color:#C9D2E0; }
+.dk .dk-tools span { color:var(--mut); }
+
+.dk .dk-row {
+  display:grid; grid-template-columns:44px 1fr 74px; gap:10px; align-items:center;
+  padding:9px 0; border-bottom:1px solid var(--line-2);
+  flex:1; min-height:0;   /* rows share the column height instead of leaving a gap */
+}
+.dk .dk-row.dim { opacity:.45; }
+.dk .src {
+  font-family:var(--mono); font-size:8.5px; letter-spacing:.1em; text-align:center;
+  padding:3px 0; border-radius:3px; border:1px solid currentColor; line-height:1;
+}
+.dk .src.f10q { color:var(--blue); } .dk .src.call { color:#8E6BFF; }
+.dk .src.wire { color:var(--mut); }  .dk .src.mkt  { color:var(--amber); }
+.dk .txt { font-size:11.5px; line-height:1.4; color:#CFD6E2; overflow:hidden; }
+.dk .txt em { font-style:normal; color:#fff; background:rgba(76,141,255,.18); padding:0 2px; border-radius:2px; }
+.dk .rel { font-family:var(--mono); font-size:9.5px; color:var(--mut); text-align:right; }
+.dk .rel i { display:block; height:3px; background:var(--blue); border-radius:2px; margin-bottom:4px; margin-left:auto; }
+.dk .rel.drop { color:var(--red); }
+
+.dk .dk-critic { margin-top:14px; padding:10px 12px; border:1px solid var(--line); border-radius:4px; background:rgba(229,166,60,.05); }
+.dk .dk-critic .dk-h2 { margin:0 0 8px; }
+.dk .dk-critic div { display:flex; align-items:flex-start; gap:8px; font-size:11px; line-height:1.45; color:#CFD6E2; padding:3px 0; }
+.dk .dot { width:6px; height:6px; border-radius:50%; margin-top:5px; flex:none; }
+.dk .dot.amber { background:var(--amber); } .dk .dot.red { background:var(--red); }
+
+.dk .dk-gauge { position:relative; text-align:center; margin-bottom:14px; }
+.dk .dk-gauge svg { width:104px; height:104px; }
+.dk .dk-gnum { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:23px; font-weight:600; letter-spacing:-.02em; margin-top:-14px; }
+.dk .dk-glab { font-family:var(--mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--mut); margin-top:-8px; }
+.dk .dk-kv { display:flex; justify-content:space-between; gap:8px; font-family:var(--mono); font-size:10px; color:var(--mut); padding:6px 0; border-bottom:1px solid var(--line-2); }
+.dk .dk-kv b { color:var(--fg); font-weight:500; }
+.dk .dk-kv b.red { color:var(--red); } .dk .dk-kv b.amber { color:var(--amber); }
+.dk .dk-spark { margin-top:auto; padding-top:14px; }
+.dk .dk-spark svg { width:100%; height:34px; }
+.dk .dk-spark span { font-family:var(--mono); font-size:8.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--mut); }
+
+/* signal panel */
+.dk .dk-verdict { display:flex; align-items:center; gap:20px; padding:16px 20px 14px; border-bottom:1px solid var(--line); }
+.dk .v-lab { font-family:var(--mono); font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--mut); margin-bottom:5px; }
+.dk .v-txt { font-size:19px; font-weight:600; letter-spacing:-.015em; line-height:1.25; }
+.dk .v-score { margin-left:auto; text-align:right; }
+.dk .v-score b { display:block; font-size:26px; font-weight:600; color:var(--blue); letter-spacing:-.02em; }
+.dk .v-score span { font-family:var(--mono); font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--mut); }
+.dk .dk-chart { position:relative; height:206px; border-bottom:1px solid var(--line); }
+.dk .dk-chart svg { width:100%; height:100%; display:block; }
+.dk .ann {
+  position:absolute; top:12px; font-family:var(--mono); font-size:9px; letter-spacing:.08em;
+  text-transform:uppercase; padding:3px 6px; border-radius:3px; white-space:nowrap;
+}
+.dk .ann.amber { color:var(--amber); background:rgba(229,166,60,.12); }
+.dk .ann.green { color:var(--green); background:rgba(53,192,138,.12); }
+.dk .dk-claims { flex:1; display:grid; grid-template-columns:1fr 1fr; min-height:0; }
+.dk .cl { padding:12px 20px; display:flex; flex-direction:column; }
+.dk .cl .c-row { flex:1; min-height:0; }
+.dk .cl.counter { border-left:1px solid var(--line); background:rgba(229,166,60,.04); }
+.dk .c-row { display:grid; grid-template-columns:44px 1fr 54px; gap:9px; align-items:center; padding:6px 0; border-bottom:1px solid var(--line-2); }
+.dk .c-row .txt { font-size:11px; }
+.dk .bar { display:block; height:3px; background:rgba(255,255,255,.10); border-radius:2px; }
+.dk .bar b { display:block; height:100%; background:var(--blue); border-radius:2px; }
+.dk .cl.counter .bar b { background:var(--amber); }
+.dk .dk-foot {
+  display:flex; justify-content:space-between; gap:16px; padding:9px 20px; border-top:1px solid var(--line);
+  font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--mut); background:#0E131B;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== W-01 DATALITH ===== -->
+<div class="panel" id="datalith-a">
+  <div class="ph"><span class="t">Estate scan</span><span class="m">412 tables · 9 systems</span></div>
+  <table>
+    <tr><th>Source</th><th>Owner</th><th>Agent-readiness</th><th>Status</th></tr>
+    <tr><td class="k">warehouse.orders</td><td>Finance</td><td><span class="bar"><i style="width:88%"></i></span>0.88</td><td>Mapped</td></tr>
+    <tr><td class="k">crm.accounts</td><td>Revenue</td><td><span class="bar"><i style="width:74%"></i></span>0.74</td><td>Mapped</td></tr>
+    <tr><td class="k">lake.events_raw</td><td>Platform</td><td><span class="bar slate"><i style="width:41%"></i></span>0.41</td><td>Needs contract</td></tr>
+    <tr><td class="k">erp.contracts</td><td>Legal</td><td><span class="bar"><i style="width:66%"></i></span>0.66</td><td>Mapped</td></tr>
+    <tr><td class="k">ops.tickets</td><td>Support</td><td><span class="bar slate"><i style="width:29%"></i></span>0.29</td><td>Unowned</td></tr>
+    <tr><td class="k">billing.invoices</td><td>Finance</td><td><span class="bar"><i style="width:81%"></i></span>0.81</td><td>Mapped</td></tr>
+    <tr><td class="k">hr.people</td><td>People</td><td><span class="bar moss"><i style="width:57%"></i></span>0.57</td><td>Restricted</td></tr>
+    <tr><td class="k">web.sessions</td><td>Growth</td><td><span class="bar slate"><i style="width:36%"></i></span>0.36</td><td>Needs contract</td></tr>
+  </table>
+  <div class="stats">
+    <div class="stat"><div class="n">412</div><div class="l">tables mapped</div></div>
+    <div class="stat"><div class="n">96<small>%</small></div><div class="l">owners resolved</div></div>
+    <div class="stat"><div class="n">0.82</div><div class="l">estate readiness</div></div>
+    <div class="stat"><div class="n">37</div><div class="l">tools exposed</div></div>
+  </div>
+</div>
+
+<div class="panel" id="datalith-b">
+  <div class="ph"><span class="t">Knowledge graph</span><span class="pill rust">Governed gateway</span></div>
+  <div class="canvas">
+    <div class="grid-bg"></div>
+    <svg viewBox="0 0 820 380" style="position:absolute;inset:0;width:100%;height:100%">
+      <g stroke="#C4552D" stroke-opacity=".45" fill="none" stroke-width="1.6">
+        <path d="M410 190 L214 96"/><path d="M410 190 L246 274"/><path d="M410 190 L596 108"/>
+        <path d="M410 190 L618 262"/><path d="M410 190 L398 62"/><path d="M410 190 L392 322"/>
+        <path d="M214 96 L398 62"/><path d="M596 108 L618 262"/><path d="M246 274 L392 322"/>
+      </g>
+      <g fill="#141210">
+        <circle cx="214" cy="96" r="13"/><circle cx="246" cy="274" r="11"/><circle cx="596" cy="108" r="13"/>
+        <circle cx="618" cy="262" r="10"/><circle cx="398" cy="62" r="11"/><circle cx="392" cy="322" r="12"/>
+      </g>
+      <circle cx="410" cy="190" r="24" fill="#C4552D"/>
+      <circle cx="410" cy="190" r="36" fill="none" stroke="#141210" stroke-width="1.4" stroke-dasharray="5 5"/>
+      <g font-family="JetBrains Mono" font-size="12" fill="#5F584B">
+        <text x="236" y="80">orders</text><text x="268" y="300">tickets</text><text x="618" y="94">accounts</text>
+        <text x="640" y="266">contracts</text><text x="420" y="52">events</text><text x="414" y="342">invoices</text>
+      </g>
+    </svg>
+    <span class="cap">3 412 edges · joins inferred from usage, confirmed by owners</span>
+  </div>
+</div>
+
+<!-- ===== W-08 AGENTIC NEWS — analyst console ===== -->
+<div class="panel dk" id="news-a">
+  <div class="dk-bar">
+    <span class="dk-brand"><i class="dk-mark"></i>Agentic News</span>
+    <span class="dk-crumb">RUN 1042 · NVDA · guidance cut priced in?</span>
+    <span class="dk-live">live · 41s</span>
+  </div>
+  <div class="dk-body">
+
+    <div class="dk-col dk-plan">
+      <div class="dk-h">Plan</div>
+      <ol class="dk-steps">
+        <li class="ok"><b>Decompose question</b><span>3 sub-questions</span></li>
+        <li class="ok"><b>Filings language</b><span>10-Q diff · 6 changes</span></li>
+        <li class="ok"><b>Sell-side revisions</b><span>11 notes · 4 cuts</span></li>
+        <li class="run"><b>Options skew</b><span>30d · 25Δ put/call</span></li>
+        <li class="wait"><b>Critic pass</b><span>queued</span></li>
+      </ol>
+      <div class="dk-h dk-h2">Tools</div>
+      <div class="dk-tools">
+        <div><b>news.search</b><span>142 → 18</span></div>
+        <div><b>filings.diff</b><span>320 ms</span></div>
+        <div><b>market.skew</b><span>88 ms</span></div>
+        <div><b>critic.challenge</b><span>1.2 s</span></div>
+      </div>
+    </div>
+
+    <div class="dk-col dk-ev">
+      <div class="dk-h">Evidence <span class="dk-count">18 kept · 124 dropped</span></div>
+      <div class="dk-row">
+        <span class="src f10q">10-Q</span>
+        <span class="txt">“…demand visibility <em>beyond the current quarter remains limited</em>” — language added vs Q2</span>
+        <span class="rel"><i style="width:92%"></i>0.92</span>
+      </div>
+      <div class="dk-row">
+        <span class="src call">CALL</span>
+        <span class="txt">CFO declines to reaffirm FY range twice under questioning</span>
+        <span class="rel"><i style="width:84%"></i>0.84</span>
+      </div>
+      <div class="dk-row">
+        <span class="src wire">WIRE</span>
+        <span class="txt">Four brokers cut targets within 36 h; median −12%</span>
+        <span class="rel"><i style="width:77%"></i>0.77</span>
+      </div>
+      <div class="dk-row dim">
+        <span class="src wire">WIRE</span>
+        <span class="txt">Op-ed: “supply chain fears overblown” — no primary source</span>
+        <span class="rel drop">dropped</span>
+      </div>
+      <div class="dk-row">
+        <span class="src mkt">MKT</span>
+        <span class="txt">25Δ put/call skew +2.4σ vs 90-day mean since 04 Feb</span>
+        <span class="rel"><i style="width:69%"></i>0.69</span>
+      </div>
+      <div class="dk-row">
+        <span class="src call">CALL</span>
+        <span class="txt">“We are <em>not</em> reaffirming the full-year range today” — CFO, Q&amp;A 34:12</span>
+        <span class="rel"><i style="width:81%"></i>0.81</span>
+      </div>
+      <div class="dk-row dim">
+        <span class="src f10q">8-K</span>
+        <span class="txt">Restructuring charge · reclassified, no revenue impact</span>
+        <span class="rel drop">off-topic</span>
+      </div>
+      <div class="dk-critic">
+        <span class="dk-h dk-h2">Critic</span>
+        <div><i class="dot amber"></i>“Priced in” rests on one options window — widen to 60d</div>
+        <div><i class="dot red"></i>Broker cuts double-count the same syndicate note</div>
+      </div>
+    </div>
+
+    <div class="dk-col dk-side">
+      <div class="dk-gauge">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="10"/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#4C8DFF" stroke-width="10" stroke-linecap="round"
+                  stroke-dasharray="289" stroke-dashoffset="84" transform="rotate(-90 60 60)"/>
+        </svg>
+        <div class="dk-gnum">0.71</div>
+        <div class="dk-glab">confidence</div>
+      </div>
+      <div class="dk-kv"><span>sources cited</span><b>18</b></div>
+      <div class="dk-kv"><span>claims dropped</span><b class="red">2</b></div>
+      <div class="dk-kv"><span>unresolved</span><b class="amber">3</b></div>
+      <div class="dk-kv"><span>tokens</span><b>184 k</b></div>
+      <div class="dk-kv"><span>cost</span><b>$0.42</b></div>
+      <div class="dk-spark">
+        <svg viewBox="0 0 160 44" preserveAspectRatio="none">
+          <polyline points="0,34 20,30 40,32 60,22 80,25 100,15 120,18 140,9 160,11"
+                    fill="none" stroke="#35C08A" stroke-width="2"/>
+        </svg>
+        <span>agreement across agents</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="panel dk" id="news-b">
+  <div class="dk-bar">
+    <span class="dk-brand"><i class="dk-mark"></i>Signal</span>
+    <span class="dk-crumb">NVDA · 12 Feb · desk note</span>
+    <span class="dk-live amber">critic held</span>
+  </div>
+  <div class="dk-verdict">
+    <div>
+      <div class="v-lab">Verdict</div>
+      <div class="v-txt">Mostly priced in — the cut, not the guidance language</div>
+    </div>
+    <div class="v-score"><b>0.71</b><span>confidence</span></div>
+  </div>
+  <div class="dk-chart">
+    <svg viewBox="0 0 860 250" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="sfill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#4C8DFF" stop-opacity=".30"/>
+          <stop offset="100%" stop-color="#4C8DFF" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <g stroke="rgba(255,255,255,.07)">
+        <path d="M0 60 H860"/><path d="M0 120 H860"/><path d="M0 180 H860"/>
+      </g>
+      <path d="M0 190 L90 168 L170 178 L250 120 L330 138 L420 96 L520 108 L620 70 L720 82 L860 44 L860 250 L0 250 Z" fill="url(#sfill)"/>
+      <path d="M0 190 L90 168 L170 178 L250 120 L330 138 L420 96 L520 108 L620 70 L720 82 L860 44"
+            fill="none" stroke="#4C8DFF" stroke-width="2.5"/>
+      <g stroke="#E5A63C" stroke-dasharray="4 4"><path d="M250 10 V250"/></g>
+      <g stroke="#35C08A" stroke-dasharray="4 4"><path d="M620 10 V250"/></g>
+      <circle cx="860" cy="44" r="5" fill="#4C8DFF"/>
+    </svg>
+    <span class="ann amber" style="left:29%">guidance cut · 04 Feb</span>
+    <span class="ann green" style="left:72%">counter-case tested</span>
+  </div>
+  <div class="dk-claims">
+    <div class="cl">
+      <div class="dk-h">Supports <span class="dk-count">4</span></div>
+      <div class="c-row"><span class="src f10q">10-Q</span><span class="txt">Visibility language weakened quarter on quarter</span><i class="bar"><b style="width:88%"></b></i></div>
+      <div class="c-row"><span class="src wire">WIRE</span><span class="txt">Median target cut −12% inside 36 h</span><i class="bar"><b style="width:74%"></b></i></div>
+      <div class="c-row"><span class="src mkt">MKT</span><span class="txt">Skew already 2.4σ rich before the print</span><i class="bar"><b style="width:66%"></b></i></div>
+      <div class="c-row"><span class="src call">CALL</span><span class="txt">CFO twice declines to reaffirm the FY range</span><i class="bar"><b style="width:81%"></b></i></div>
+    </div>
+    <div class="cl counter">
+      <div class="dk-h">Counter-case <span class="dk-count">2</span></div>
+      <div class="c-row"><span class="src call">CALL</span><span class="txt">Backlog commentary unchanged; no order cancellations named</span><i class="bar"><b style="width:58%"></b></i></div>
+      <div class="c-row"><span class="src mkt">MKT</span><span class="txt">Skew normalises past 60d window — one-window artefact</span><i class="bar"><b style="width:44%"></b></i></div>
+      <div class="c-row"><span class="src wire">WIRE</span><span class="txt">Two “independent” cuts trace to one syndicate note</span><i class="bar"><b style="width:37%"></b></i></div>
+    </div>
+  </div>
+  <div class="dk-foot">
+    <span>18 sources cited · 2 claims dropped · 3 unresolved</span>
+    <span>every sentence links to a filing, a transcript line or a print</span>
+  </div>
+</div>
+
+<!-- ===== W-06 GENERATIVE V2X ===== -->
+<div class="panel" id="v2x-a">
+  <div class="ph"><span class="t">Generated traces</span><span class="m">Diffusion · 5 000 samples</span></div>
+  <div class="canvas dark">
+    <svg viewBox="0 0 820 380" style="position:absolute;inset:0;width:100%;height:100%">
+      <g stroke="#2E3238" stroke-width="1">
+        <path d="M0 95 H820"/><path d="M0 190 H820"/><path d="M0 285 H820"/>
+      </g>
+      <path d="M20 300 C 90 210, 140 340, 210 250 S 330 160, 400 236 S 520 130, 600 210 S 720 150, 800 190"
+            fill="none" stroke="#E4A159" stroke-width="2.6"/>
+      <path d="M20 250 C 100 300, 150 180, 220 240 S 340 300, 410 200 S 530 250, 610 160 S 730 210, 800 140"
+            fill="none" stroke="#7FA88B" stroke-width="2" stroke-opacity=".85"/>
+      <path d="M20 180 C 110 150, 160 260, 240 190 S 350 120, 430 170 S 560 90, 640 140 S 740 110, 800 96"
+            fill="none" stroke="#E9E1D2" stroke-width="1.6" stroke-opacity=".5" stroke-dasharray="6 5"/>
+      <g font-family="JetBrains Mono" font-size="12" fill="rgba(233,225,210,.6)">
+        <text x="20" y="34">PATH LOSS</text><text x="150" y="34" fill="#E4A159">GENERATED</text>
+        <text x="270" y="34" fill="#7FA88B">MEASURED</text><text x="410" y="34">— KS 0.031</text>
+      </g>
+    </svg>
+    <span class="cap">Synthetic channel traces vs held-out measurements</span>
+  </div>
+</div>
+
+<div class="panel" id="v2x-b">
+  <div class="ph"><span class="t">Mobility scenario</span><span class="pill moss">SUMO · replayed</span></div>
+  <div class="canvas dark">
+    <svg viewBox="0 0 820 380" style="position:absolute;inset:0;width:100%;height:100%">
+      <g stroke="#31353B" stroke-width="26" stroke-linecap="square">
+        <path d="M60 300 H760"/><path d="M60 140 H760"/><path d="M300 40 V340"/><path d="M540 40 V340"/>
+      </g>
+      <g stroke="#4B5058" stroke-width="1" stroke-dasharray="10 12">
+        <path d="M60 300 H760"/><path d="M60 140 H760"/><path d="M300 40 V340"/><path d="M540 40 V340"/>
+      </g>
+      <g fill="#E4A159">
+        <rect x="180" y="292" width="26" height="16" rx="3"/><rect x="392" y="292" width="26" height="16" rx="3"/>
+        <rect x="292" y="196" width="16" height="26" rx="3"/>
+      </g>
+      <g fill="#7FA88B"><rect x="600" y="132" width="26" height="16" rx="3"/><rect x="532" y="252" width="16" height="26" rx="3"/></g>
+      <g stroke="#E4A159" stroke-opacity=".55" stroke-dasharray="4 5" fill="none">
+        <path d="M193 292 C 240 240, 260 200, 300 196"/><path d="M405 292 C 470 250, 520 180, 600 148"/>
+      </g>
+      <circle cx="300" cy="209" r="46" fill="none" stroke="#E4A159" stroke-opacity=".3"/>
+      <circle cx="300" cy="209" r="72" fill="none" stroke="#E4A159" stroke-opacity=".16"/>
+      <g font-family="JetBrains Mono" font-size="12" fill="rgba(233,225,210,.55)">
+        <text x="60" y="46">48 VEHICLES · 6 RSU · 28 GHZ</text>
+      </g>
+    </svg>
+    <span class="cap">Traffic replayed, radio regenerated — one paired dataset</span>
+  </div>
+</div>
+
+<!-- ===== W-07 ARC PRIZE ===== -->
+<div class="panel" id="arc-a">
+  <div class="ph"><span class="t">Task 0934a4d8</span><span class="m">Train pair 2 of 3</span></div>
+  <div class="canvas">
+    <span class="arc-lab">Input → output</span>
+    <div class="arc" id="arc-grids"></div>
+  </div>
+</div>
+
+<div class="panel" id="arc-b">
+  <div class="ph"><span class="t">Candidate programs</span><span class="pill rust">2 attempts left</span></div>
+  <table>
+    <tr><th>Hypothesis</th><th>Train pairs</th><th>Cost</th><th>Score</th></tr>
+    <tr><td class="k">mirror(v) ∘ recolour(k)</td><td>3 / 3</td><td>7 ops</td><td><span class="bar"><i style="width:94%"></i></span>0.94</td></tr>
+    <tr><td class="k">tile(2,2) ∘ mask(largest)</td><td>3 / 3</td><td>11 ops</td><td><span class="bar"><i style="width:78%"></i></span>0.78</td></tr>
+    <tr><td class="k">flood(centre) ∘ crop</td><td>2 / 3</td><td>6 ops</td><td><span class="bar slate"><i style="width:52%"></i></span>0.52</td></tr>
+    <tr><td class="k">rotate(90) ∘ overlay</td><td>1 / 3</td><td>9 ops</td><td><span class="bar slate"><i style="width:23%"></i></span>0.23</td></tr>
+    <tr><td class="k">gravity(down) ∘ recolour(k)</td><td>2 / 3</td><td>8 ops</td><td><span class="bar slate"><i style="width:44%"></i></span>0.44</td></tr>
+    <tr><td class="k">symmetry(fill) ∘ denoise</td><td>3 / 3</td><td>14 ops</td><td><span class="bar"><i style="width:69%"></i></span>0.69</td></tr>
+    <tr><td class="k">count(objects) ∘ paint</td><td>0 / 3</td><td>5 ops</td><td><span class="bar slate"><i style="width:11%"></i></span>0.11</td></tr>
+  </table>
+  <div class="stats">
+    <div class="stat"><div class="n">240</div><div class="l">tasks searched</div></div>
+    <div class="stat"><div class="n">0</div><div class="l">internet at test time</div></div>
+    <div class="stat"><div class="n">12<small>h</small></div><div class="l">compute budget</div></div>
+    <div class="stat"><div class="n">2</div><div class="l">guesses allowed</div></div>
+  </div>
+</div>
+
+<!-- ===== W-09 MECAI ===== -->
+<div class="panel" id="mecai-a">
+  <div class="ph"><span class="t">Photo → diagnosis</span><span class="m">One shot · 4.1 s</span></div>
+  <div class="canvas">
+    <div class="phone">
+      <div class="scr">
+        <div class="photo"></div>
+        <div class="box" style="left:38px;top:120px;width:104px;height:78px"></div>
+        <div class="tagx" style="left:38px;top:100px">belt · frayed</div>
+        <div class="box" style="left:104px;top:236px;width:70px;height:54px;border-color:#7FA88B"></div>
+        <div class="tagx" style="left:104px;top:216px;background:#7FA88B">coolant cap</div>
+      </div>
+    </div>
+    <div class="faults">
+      <div class="fault"><span class="r">01</span><span class="n">Serpentine belt worn</span><span class="p">0.91</span></div>
+      <div class="fault"><span class="r">02</span><span class="n">Coolant reservoir low</span><span class="p">0.63</span></div>
+      <div class="fault"><span class="r">03</span><span class="n">Tensioner pulley play</span><span class="p">0.42</span></div>
+      <div class="fault"><span class="r">04</span><span class="n">Oil seep at valve cover</span><span class="p">0.28</span></div>
+      <div class="fault"><span class="r">05</span><span class="n">Idler pulley bearing noise</span><span class="p">0.19</span></div>
+      <div class="fault"><span class="r">—</span><span class="n">Ask for a second angle</span><span class="p">suggested</span></div>
+      <div class="fault"><span class="r">—</span><span class="n">Send estimate to shop</span><span class="p">ready</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="panel" id="mecai-b">
+  <div class="ph"><span class="t">Repair estimate</span><span class="pill moss">Sent to shop</span></div>
+  <table>
+    <tr><th>Part</th><th>Reference</th><th>Labour</th><th>Confidence</th></tr>
+    <tr><td class="k">Serpentine belt</td><td>6PK1875</td><td>0.8 h</td><td><span class="bar"><i style="width:91%"></i></span>0.91</td></tr>
+    <tr><td class="k">Belt tensioner</td><td>ATB2185</td><td>1.2 h</td><td><span class="bar"><i style="width:62%"></i></span>0.62</td></tr>
+    <tr><td class="k">Coolant · 2 L</td><td>G12++</td><td>0.3 h</td><td><span class="bar moss"><i style="width:74%"></i></span>0.74</td></tr>
+    <tr><td class="k">Valve-cover gasket</td><td>VS50675</td><td>2.4 h</td><td><span class="bar slate"><i style="width:28%"></i></span>0.28</td></tr>
+    <tr><td class="k">Idler pulley</td><td>ATB1042</td><td>0.9 h</td><td><span class="bar"><i style="width:55%"></i></span>0.55</td></tr>
+    <tr><td class="k">Cabin filter</td><td>CUK2939</td><td>0.4 h</td><td><span class="bar moss"><i style="width:38%"></i></span>0.38</td></tr>
+    <tr><td class="k">Diagnostic scan</td><td>OBD-II</td><td>0.5 h</td><td><span class="bar moss"><i style="width:82%"></i></span>0.82</td></tr>
+  </table>
+  <div class="stats">
+    <div class="stat"><div class="n">4.1<small>s</small></div><div class="l">photo to list</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">parts matched</div></div>
+    <div class="stat"><div class="n">FR</div><div class="l">shop language</div></div>
+    <div class="stat"><div class="n">2</div><div class="l">questions asked back</div></div>
+  </div>
+</div>
+
+<script>
+/* ARC-style grid pair — colours from the standard ARC palette */
+const PAL = ['#111827','#2563EB','#DC2626','#16A34A','#EAB308','#9CA3AF','#EC4899','#F97316','#38BDF8','#7C2D12'];
+const IN = [
+  [0,0,3,0,0],
+  [0,3,3,3,0],
+  [0,0,3,0,0],
+  [0,0,0,0,2],
+  [2,0,0,0,0]
+];
+const OUT = IN.map(r => r.slice().reverse()).map(r => r.map(v => v === 3 ? 4 : v));
+function grid(m) {
+  const g = document.createElement('div');
+  g.className = 'g';
+  g.style.gridTemplateColumns = `repeat(${m[0].length}, 26px)`;
+  m.flat().forEach(v => {
+    const c = document.createElement('i');
+    c.className = 'c';
+    c.style.background = PAL[v];
+    g.appendChild(c);
+  });
+  return g;
+}
+const IN2 = [
+  [0,0,0,8,0],
+  [0,8,8,8,0],
+  [0,0,0,8,0],
+  [2,0,0,0,0],
+  [0,0,0,0,2]
+];
+const OUT2 = IN2.map(r => r.slice().reverse()).map(r => r.map(v => v === 8 ? 7 : v));
+
+function pair(a, b) {
+  const row = document.createElement('div');
+  row.className = 'pair';
+  row.appendChild(grid(a));
+  const arrow = document.createElement('span');
+  arrow.className = 'arrow'; arrow.textContent = '→';
+  row.appendChild(arrow);
+  row.appendChild(grid(b));
+  return row;
+}
+
+const host = document.getElementById('arc-grids');
+host.appendChild(pair(IN, OUT));
+host.appendChild(pair(IN2, OUT2));
+</script>
+</body>
+</html>
